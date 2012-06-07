@@ -38,6 +38,18 @@ package
         
         [Embed(source = "../media/textures/2x/brush.png")]
         public static const Brush:Class;
+		
+		[Embed(source = "../media/textures/2x/BrushCrayon.png")]
+        public static const BrushCrayon:Class;
+		
+		[Embed(source = "../media/textures/2x/BrushCircle.png")]
+        public static const BrushCircle:Class;
+		
+		[Embed(source = "../media/textures/2x/BrushCircleSoft.png")]
+        public static const BrushCircleSoft:Class;
+		
+		[Embed(source = "../media/textures/2x/BrushCalligraphy.png")]
+        public static const BrushCalligraphy:Class;
         
         // Compressed textures
         
