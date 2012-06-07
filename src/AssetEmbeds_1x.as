@@ -6,8 +6,11 @@ package
     {
         // Bitmaps
         
-        [Embed(source = "../media/textures/1x/background.png")]
+        [Embed(source = "../media/textures/1x/background_wht.png")]
         public static const Background:Class;
+		
+        [Embed(source = "../media/textures/1x/App_SullivanSnail_480.png")]
+        public static const Foreground:Class;
         
         [Embed(source = "../media/textures/1x/starling_sheet.png")]
         public static const StarlingSheet:Class;

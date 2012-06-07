@@ -17,6 +17,7 @@ package scenes
     {
         private var mRenderTexture:RenderTexture;
         private var mCanvas:Image;
+		private var mCanvasFG:Image;
         private var mBrush:Image;
         private var mButton:Button;
         private var mColors:Dictionary;
@@ -27,8 +28,11 @@ package scenes
             mRenderTexture = new RenderTexture(320, 435);
             
             mCanvas = new Image(mRenderTexture);
-            mCanvas.addEventListener(TouchEvent.TOUCH, onTouch);
             addChild(mCanvas);
+			
+            mCanvasFG = new Image(Assets.getTexture("Foreground"));
+			mCanvasFG.addEventListener(TouchEvent.TOUCH, onTouch);
+            addChild(mCanvasFG);
             
             mBrush = new Image(Assets.getTexture("Brush"));
             mBrush.pivotX = mBrush.width / 2;
@@ -56,7 +60,7 @@ package scenes
             
             mRenderTexture.drawBundled(function():void
             {
-                var touches:Vector.<Touch> = event.getTouches(mCanvas);
+                var touches:Vector.<Touch> = event.getTouches(mCanvasFG);
             
                 for each (var touch:Touch in touches)
                 {
@@ -66,7 +70,7 @@ package scenes
                     if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
                         continue;
                     
-                    var location:Point = touch.getLocation(mCanvas);
+                    var location:Point = touch.getLocation(mCanvasFG);
                     mBrush.x = location.x;
                     mBrush.y = location.y;
                     mBrush.color = mColors[touch.id];
