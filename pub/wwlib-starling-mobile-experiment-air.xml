@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/3.2">
+  <id>wwlib.starling-mobile-experiment</id>
+  <versionNumber>1.0</versionNumber>
+  <filename>wwlib-starling-mobile-experiment</filename>
+  <name>wwlib-starling-mobile-experiment</name>
+  <initialWindow>
+    <renderMode>direct</renderMode>
+    <depthAndStencil>false</depthAndStencil>
+    <content>deploy/wwlib-starling-mobile-experiment.swf</content>
+    <visible>true</visible>
+    <resizable>false</resizable>
+    <maximizable>false</maximizable>
+    <transparent>false</transparent>
+    <width>1024</width>
+    <height>768</height>
+    <systemChrome>standard</systemChrome>
+  </initialWindow>
+  <icon>
+    <image48x48>deploy/iosImages/icons/icon48.png</image48x48>
+  </icon>
+</application>
