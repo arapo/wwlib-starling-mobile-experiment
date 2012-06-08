@@ -20,6 +20,8 @@ package scenes
 		private var mCanvasFG:Image;
         private var mBrush:Image;
         private var mButton:Button;
+        private var mRedButton:Button;
+        private var mBlueButton:Button;
         private var mColors:Dictionary;
         
         public function RenderTextureScene()
@@ -50,6 +52,18 @@ package scenes
             mButton.y = 15;
             mButton.addEventListener(Event.TRIGGERED, onButtonTriggered);
             addChild(mButton);
+            
+            mRedButton = new Button(Assets.getTexture("ButtonSquare"), "Red");
+            mRedButton.x = 5;
+            mRedButton.y = int(Constants.CenterY - mRedButton.width / 2)-30;
+            mRedButton.addEventListener(Event.TRIGGERED, onRedButtonTriggered);
+            addChild(mRedButton);
+            
+            mBlueButton = new Button(Assets.getTexture("ButtonSquare"), "Blue");
+            mBlueButton.x = 5;
+            mBlueButton.y = int(Constants.CenterY - mBlueButton.width / 2)+30;
+            mBlueButton.addEventListener(Event.TRIGGERED, onBlueButtonTriggered);
+            addChild(mBlueButton); 
         }
         
         private function onTouch(event:TouchEvent):void
@@ -57,6 +71,8 @@ package scenes
             // touching the canvas will draw a brush texture. The 'drawBundled' method is not
             // strictly necessary, but it's faster when you are drawing with several fingers
             // simultaneously.
+			
+			
             
             mRenderTexture.drawBundled(function():void
             {
@@ -66,20 +82,36 @@ package scenes
                 {
                     if (touch.phase == TouchPhase.BEGAN)
                         mColors[touch.id] = Math.random() * uint.MAX_VALUE;
-                    
+						
                     if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
                         continue;
                     
                     var location:Point = touch.getLocation(mCanvasFG);
                     mBrush.x = location.x;
                     mBrush.y = location.y;
-                    mBrush.color = mColors[touch.id];
+                    //mBrush.color = mColors[touch.id];
+                    //mBrush.color = 000000;
                     mBrush.rotation = Math.random() * Math.PI * 2.0;
                     
                     mRenderTexture.draw(mBrush);
                 }
             });
         }
+        
+        private function onBlueButtonTriggered(event:Event):void
+        {
+        mBrush.color = (0x112FFF);
+        mBlueButton.text = "BLUE";
+        mRedButton.text = "Red";
+        }
+                
+        private function onRedButtonTriggered(event:Event):void
+        {
+        mBrush.color = (0xFF1111);
+        mRedButton.text = "RED";
+        mBlueButton.text = "Blue";
+        }
+        
         
         private function onButtonTriggered(event:Event):void
         {
