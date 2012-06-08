@@ -54,6 +54,18 @@ package
 		[Embed(source = "../media/textures/2x/BrushCalligraphy.png")]
         public static const BrushCalligraphy:Class;
         
+		[Embed(source = "../media/textures/2x/menu_color.png")]
+        public static const MenuColor:Class;
+		
+		[Embed(source = "../media/textures/2x/menu_brush.png")]
+        public static const MenuBrush:Class;
+		
+		//[Embed(source = "../media/textures/2x/menu_scene.png")]
+        //public static const MenuBrush:Class;
+		
+		//[Embed(source = "../media/textures/2x/menu_share.png")]
+        //public static const MenuBrush:Class;
+		
         // Compressed textures
         
         [Embed(source = "../media/textures/2x/compressed_texture.atf", mimeType="application/octet-stream")]

@@ -12,7 +12,7 @@
         <content>wwlib-starling-mobile-experiment.swf</content>
 		<fullScreen>true</fullScreen>
 		<aspectRatio>landscape</aspectRatio>
-		<autoOrients>true</autoOrients>
+		<autoOrients>false</autoOrients>
     </initialWindow>
 	<icon>
 		<image29x29>iosImages/icons/icon29.png</image29x29>

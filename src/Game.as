@@ -38,8 +38,8 @@ package
             // then run on a device with a different resolution, and the assets class will
             // provide textures in the most suitable format.
             
-            Starling.current.stage.stageWidth  = 320;
-            Starling.current.stage.stageHeight = 480;
+            Starling.current.stage.stageWidth  = 480;
+            Starling.current.stage.stageHeight = 320;
             Assets.contentScaleFactor = Starling.current.contentScaleFactor;
             
             // load general assets
@@ -60,14 +60,14 @@ package
             mMainMenu.addChild(logo);
             
             var scenesToCreate:Array = [
-                ["Textures", TextureScene],
+                ["Render Texture", RenderTextureScene],
+				["Textures", TextureScene],
                 ["Multitouch", TouchScene],
                 ["TextFields", TextScene],
                 ["Animations", AnimationScene],
                 ["Custom hit-test", CustomHitTestScene],
                 ["Movie Clip", MovieScene],
-                ["Benchmark", BenchmarkScene],
-                ["Render Texture", RenderTextureScene]
+                ["Benchmark", BenchmarkScene]
             ];
             
             var buttonTexture:Texture = Assets.getTexture("ButtonBig");

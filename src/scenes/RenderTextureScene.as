@@ -12,6 +12,9 @@ package scenes
     import starling.events.TouchPhase;
     import starling.text.TextField;
     import starling.textures.RenderTexture;
+	import starling.animation.Transitions;
+    import starling.animation.Tween;
+	import starling.core.Starling;
 
     public class RenderTextureScene extends Scene
     {
@@ -23,11 +26,19 @@ package scenes
         private var mRedButton:Button;
         private var mBlueButton:Button;
         private var mColors:Dictionary;
+		
+		private var __MENU_START_Y:int = -283;
+		private var __menuColor:Image;
+		private var __menuBrush:Image;
+		private var __menuScene:Image;
+		private var __menuShare:Image;
+		
+		private var __transitions:Array;
         
         public function RenderTextureScene()
         {
             mColors = new Dictionary();
-            mRenderTexture = new RenderTexture(320, 435);
+            mRenderTexture = new RenderTexture(480, 320);
             
             mCanvas = new Image(mRenderTexture);
             addChild(mCanvas);
@@ -63,8 +74,101 @@ package scenes
             mBlueButton.x = 5;
             mBlueButton.y = int(Constants.CenterY - mBlueButton.width / 2)+30;
             mBlueButton.addEventListener(Event.TRIGGERED, onBlueButtonTriggered);
-            addChild(mBlueButton); 
+            addChild(mBlueButton);
+			
+			__transitions = [Transitions.LINEAR, Transitions.EASE_OUT, Transitions.EASE_IN_OUT,
+                            Transitions.EASE_OUT_BACK, Transitions.EASE_OUT_BOUNCE,
+                            Transitions.EASE_OUT_ELASTIC];
+							
+			setupMenus();
         }
+		
+		private function setupMenus():void
+		{
+			
+			__menuColor = new Image(Assets.getTexture("MenuColor"));
+			__menuBrush = new Image(Assets.getTexture("MenuBrush"));
+			//__menuScene = new Image(Assets.getTexture("menu_scene.png"));
+			//__menuShare = new Image(Assets.getTexture("menu_share.png"));
+			
+			__menuColor.addEventListener(TouchEvent.TOUCH, onTouchMenuColor);
+			__menuBrush.addEventListener(TouchEvent.TOUCH, onTouchMenuBrush);
+			
+			__menuColor.y = __MENU_START_Y;
+			__menuBrush.y = __MENU_START_Y;
+			
+			addChild(__menuBrush);
+			addChild(__menuColor);
+			
+		}
+		
+        private function onTouchMenuColor(event:TouchEvent):void
+        {
+			var touches:Vector.<Touch> = event.getTouches(__menuColor);
+			var tween:Tween;
+			var transition:String;
+            
+                for each (var touch:Touch in touches)
+                {
+                    if (touch.phase == TouchPhase.BEGAN)
+					{
+						if (__menuColor.y == 0)
+						{
+							// get next transition style from array and enqueue it at the end
+							transition = __transitions.shift();
+							__transitions.push(transition);
+							
+							tween = new Tween(__menuColor, 0.5, transition);
+
+							tween.moveTo(0, __MENU_START_Y);
+							//tween.onComplete = function():void { };
+
+							Starling.juggler.add(tween);
+							//__menuColor.y = __MENU_START_Y;
+						}
+						else
+						{
+							// get next transition style from array and enqueue it at the end
+							transition = __transitions.shift();
+							__transitions.push(transition);
+							
+							tween = new Tween(__menuColor, 0.5, transition);
+
+							tween.moveTo(0, 0);
+							//tween.onComplete = function():void { };
+
+							Starling.juggler.add(tween);
+							//__menuColor.y = 0;
+						}
+					}
+						
+                    if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
+                        continue;
+                }
+		}
+		
+        private function onTouchMenuBrush(event:TouchEvent):void
+        {
+			var touches:Vector.<Touch> = event.getTouches(__menuBrush);
+            
+                for each (var touch:Touch in touches)
+                {
+                    if (touch.phase == TouchPhase.BEGAN)
+					{
+						if (__menuBrush.y == 0)
+						{
+							__menuBrush.y = __MENU_START_Y;
+						}
+						else
+						{
+							__menuBrush.y = 0;
+						}
+					}
+						
+                    if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
+                        continue;
+                }
+		}
         
         private function onTouch(event:TouchEvent):void
         {
