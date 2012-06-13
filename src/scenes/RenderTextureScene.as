@@ -1,7 +1,10 @@
 package scenes
 {
+	import flash.display.LoaderInfo;
     import flash.geom.Point;
     import flash.utils.Dictionary;
+	import org.wwlib.starling.menu.WwMenuManager;
+	import org.wwlib.util.WwDebug;
     
     import starling.display.BlendMode;
     import starling.display.Button;
@@ -23,8 +26,6 @@ package scenes
 		private var mCanvasFG:Image;
         private var mBrush:Image;
         private var mButton:Button;
-        private var mRedButton:Button;
-        private var mBlueButton:Button;
         private var mColors:Dictionary;
 		
 		private var __MENU_START_Y:int = -283;
@@ -34,9 +35,13 @@ package scenes
 		private var __menuShare:Image;
 		
 		private var __transitions:Array;
+		private var __menuManager:WwMenuManager;
+		private var __debug:WwDebug;
         
         public function RenderTextureScene()
         {
+			__debug = WwDebug.instance;
+			
             mColors = new Dictionary();
             mRenderTexture = new RenderTexture(480, 320);
             
@@ -52,123 +57,19 @@ package scenes
             mBrush.pivotY = mBrush.height / 2;
             mBrush.blendMode = BlendMode.NORMAL;
             
-            var infoText:TextField = new TextField(256, 128, "Touch the screen\nto draw!");
-            infoText.fontSize = 24;
-            infoText.x = Constants.CenterX - infoText.width / 2;
-            infoText.y = Constants.CenterY - infoText.height / 2;
-            mRenderTexture.draw(infoText);
-            
             mButton = new Button(Assets.getTexture("ButtonNormal"), "Mode: Draw");
-            mButton.x = int(Constants.CenterX - mButton.width / 2);
-            mButton.y = 15;
+            mButton.x = 690 / 2;
+            mButton.y = 570 / 2;
             mButton.addEventListener(Event.TRIGGERED, onButtonTriggered);
             addChild(mButton);
-            
-            mRedButton = new Button(Assets.getTexture("ButtonSquare"), "Red");
-            mRedButton.x = 5;
-            mRedButton.y = int(Constants.CenterY - mRedButton.width / 2)-30;
-            mRedButton.addEventListener(Event.TRIGGERED, onRedButtonTriggered);
-            addChild(mRedButton);
-            
-            mBlueButton = new Button(Assets.getTexture("ButtonSquare"), "Blue");
-            mBlueButton.x = 5;
-            mBlueButton.y = int(Constants.CenterY - mBlueButton.width / 2)+30;
-            mBlueButton.addEventListener(Event.TRIGGERED, onBlueButtonTriggered);
-            addChild(mBlueButton);
 			
 			__transitions = [Transitions.LINEAR, Transitions.EASE_OUT, Transitions.EASE_IN_OUT,
                             Transitions.EASE_OUT_BACK, Transitions.EASE_OUT_BOUNCE,
                             Transitions.EASE_OUT_ELASTIC];
 							
-			setupMenus();
+			__menuManager = WwMenuManager.init(this);
+			__menuManager.loadXML();
         }
-		
-		private function setupMenus():void
-		{
-			
-			__menuColor = new Image(Assets.getTexture("MenuColor"));
-			__menuBrush = new Image(Assets.getTexture("MenuBrush"));
-			//__menuScene = new Image(Assets.getTexture("menu_scene.png"));
-			//__menuShare = new Image(Assets.getTexture("menu_share.png"));
-			
-			__menuColor.addEventListener(TouchEvent.TOUCH, onTouchMenuColor);
-			__menuBrush.addEventListener(TouchEvent.TOUCH, onTouchMenuBrush);
-			
-			__menuColor.y = __MENU_START_Y;
-			__menuBrush.y = __MENU_START_Y;
-			
-			addChild(__menuBrush);
-			addChild(__menuColor);
-			
-		}
-		
-        private function onTouchMenuColor(event:TouchEvent):void
-        {
-			var touches:Vector.<Touch> = event.getTouches(__menuColor);
-			var tween:Tween;
-			var transition:String;
-            
-                for each (var touch:Touch in touches)
-                {
-                    if (touch.phase == TouchPhase.BEGAN)
-					{
-						if (__menuColor.y == 0)
-						{
-							// get next transition style from array and enqueue it at the end
-							transition = __transitions.shift();
-							__transitions.push(transition);
-							
-							tween = new Tween(__menuColor, 0.5, transition);
-
-							tween.moveTo(0, __MENU_START_Y);
-							//tween.onComplete = function():void { };
-
-							Starling.juggler.add(tween);
-							//__menuColor.y = __MENU_START_Y;
-						}
-						else
-						{
-							// get next transition style from array and enqueue it at the end
-							transition = __transitions.shift();
-							__transitions.push(transition);
-							
-							tween = new Tween(__menuColor, 0.5, transition);
-
-							tween.moveTo(0, 0);
-							//tween.onComplete = function():void { };
-
-							Starling.juggler.add(tween);
-							//__menuColor.y = 0;
-						}
-					}
-						
-                    if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
-                        continue;
-                }
-		}
-		
-        private function onTouchMenuBrush(event:TouchEvent):void
-        {
-			var touches:Vector.<Touch> = event.getTouches(__menuBrush);
-            
-                for each (var touch:Touch in touches)
-                {
-                    if (touch.phase == TouchPhase.BEGAN)
-					{
-						if (__menuBrush.y == 0)
-						{
-							__menuBrush.y = __MENU_START_Y;
-						}
-						else
-						{
-							__menuBrush.y = 0;
-						}
-					}
-						
-                    if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
-                        continue;
-                }
-		}
         
         private function onTouch(event:TouchEvent):void
         {
@@ -200,22 +101,7 @@ package scenes
                     mRenderTexture.draw(mBrush);
                 }
             });
-        }
-        
-        private function onBlueButtonTriggered(event:Event):void
-        {
-        mBrush.color = (0x112FFF);
-        mBlueButton.text = "BLUE";
-        mRedButton.text = "Red";
-        }
-                
-        private function onRedButtonTriggered(event:Event):void
-        {
-        mBrush.color = (0xFF1111);
-        mRedButton.text = "RED";
-        mBlueButton.text = "Blue";
-        }
-        
+        }     
         
         private function onButtonTriggered(event:Event):void
         {
@@ -230,6 +116,12 @@ package scenes
                 mButton.text = "Mode: Draw";
             }
         }
+		
+		public function set brushColorFromString(hex_color:String):void
+		{
+			mBrush.color = uint(hex_color);
+			__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.color);
+		}
         
         public override function dispose():void
         {
