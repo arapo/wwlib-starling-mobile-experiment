@@ -37,6 +37,8 @@ package scenes
 		private var __transitions:Array;
 		private var __menuManager:WwMenuManager;
 		private var __debug:WwDebug;
+		private var __activeColor:uint;
+		private var __rotateBrush:Boolean = true;
         
         public function RenderTextureScene()
         {
@@ -58,7 +60,7 @@ package scenes
             mBrush.blendMode = BlendMode.NORMAL;
             
             mButton = new Button(Assets.getTexture("ButtonNormal"), "Mode: Draw");
-            mButton.x = 690 / 2;
+            mButton.x = 690 / 2;  //TODO: fix scale for iphone.
             mButton.y = 570 / 2;
             mButton.addEventListener(Event.TRIGGERED, onButtonTriggered);
             addChild(mButton);
@@ -96,7 +98,10 @@ package scenes
                     mBrush.y = location.y;
                     //mBrush.color = mColors[touch.id];
                     //mBrush.color = 000000;
-                    mBrush.rotation = Math.random() * Math.PI * 2.0;
+					if (__rotateBrush)
+					{
+						mBrush.rotation = Math.random() * Math.PI * 2.0;
+					}
                     
                     mRenderTexture.draw(mBrush);
                 }
@@ -119,8 +124,21 @@ package scenes
 		
 		public function set brushColorFromString(hex_color:String):void
 		{
-			mBrush.color = uint(hex_color);
+			__activeColor =  uint(hex_color);
+			mBrush.color = __activeColor;
 			__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.color);
+		}
+		
+		public function set brush(img:Image):void
+		{
+			__debug.msg("set: brush: " + img);
+			mBrush = img;
+			mBrush.color = __activeColor;
+		}
+		
+		public function set roatateBrush(f:Boolean):void
+		{
+			__rotateBrush = f;
 		}
         
         public override function dispose():void

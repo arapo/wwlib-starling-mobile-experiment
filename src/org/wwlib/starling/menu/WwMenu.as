@@ -96,7 +96,7 @@ package org.wwlib.starling.menu
 		public function animate():void
 		{
 			var tween:Tween;
-			if (y == __yOn)
+			if (y == __yOn && x == __xOn)
 			{	
 				tween = new Tween(this, 0.5, __transition);
 
@@ -116,10 +116,10 @@ package org.wwlib.starling.menu
 			}
 		}
 		
-		//override this
+		
 		public function chooseOption(value:String):void
 		{
-			__debug.msg("chooseOption: " + value + ", " + __optionFunction);
+			//__debug.msg("chooseOption: " + value + ", " + __optionFunction);
 			if ((value != "") && (__optionFunction != null))
 			{
 				__optionFunction(value);

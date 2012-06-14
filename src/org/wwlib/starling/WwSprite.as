@@ -41,18 +41,25 @@ package org.wwlib.starling
 		{
 			__url = url;
 			//__debug.msg("loadImage: " + __url);
-			// create a LoaderContext
-			var loaderContext:LoaderContext = new LoaderContext();
-			// specify async decoding
-			loaderContext.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
-			// create a Loader
-			var loader:Loader = new Loader();
-			// inform the Loader
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onImageLoaded);
-			loader.load( new URLRequest(url), loaderContext );
+			if (__url != "")
+			{
+				// create a LoaderContext
+				var loaderContext:LoaderContext = new LoaderContext();
+				// specify async decoding
+				loaderContext.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
+				// create a Loader
+				var loader:Loader = new Loader();
+				// inform the Loader
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onImageLoaded);
+				loader.load( new URLRequest(url), loaderContext );
+			}
+			else
+			{
+				onReady();
+			}
 		}
 		
-		private function onImageLoaded(event:Event):void
+		protected function onImageLoaded(event:Event):void
 		{
 			//__debug.msg("onImageLoaded: "+ __url);
 			__bmp = event.target.content as Bitmap;
@@ -70,7 +77,10 @@ package org.wwlib.starling
 			//__debug.msg("onReady: " + __url);
 		}
 
-		
+		public function get image():Image
+		{
+			return __img;
+		}
 	}
 
 }

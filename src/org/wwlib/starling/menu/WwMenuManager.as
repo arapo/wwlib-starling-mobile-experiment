@@ -6,12 +6,15 @@ package org.wwlib.starling.menu
 	import flash.net.FileReference;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import org.wwlib.starling.WwBrush;
+	import org.wwlib.starling.WwSprite;
 	import org.wwlib.util.WwDebug;
 	import scenes.RenderTextureScene;
 	import scenes.Scene;
 	import starling.animation.DelayedCall;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
+	import starling.display.Image;
 	/**
 	 * ...
 	 * @author arapo
@@ -31,6 +34,11 @@ package org.wwlib.starling.menu
 		private var __pagesMenu:WwMenu;
 		private var __shareMenu:WwMenu;
 		private var __shopMenu:WwMenu;
+		private var __debugMenu:WwMenu;
+		
+		private var __brush1:WwSprite;
+		private var __brush2:WwSprite;
+		private var __brush3:WwSprite;
 				
 		/**
 		*   Construct the WwMenuManager. This class is a Singleton, so it should not
@@ -59,6 +67,7 @@ package org.wwlib.starling.menu
 			{
 				__instance = new WwMenuManager(new SingletonEnforcer());
 				__instance.__scene = _scene;
+				__instance.loadBrushes();
 			}
 			
 			return __instance;
@@ -114,16 +123,23 @@ package org.wwlib.starling.menu
 					case "colors":
 						__colorsMenu = new WwMenu(menu_xml);
 						__scene.addChild(__colorsMenu);
-						__colorsMenu.setOptionFunction(colorMenuOption);
+						__colorsMenu.setOptionFunction(colorsMenuOption);
 					break;
 					case "brushes":
 						__brushesMenu = new WwMenu(menu_xml);
 						__scene.addChild(__brushesMenu);
+						__brushesMenu.setOptionFunction(brushesMenuOption);
 					break;	
 					case "pages":
 						__pagesMenu = new WwMenu(menu_xml);
 						__scene.addChild(__pagesMenu);
-					break;					
+						__pagesMenu.setOptionFunction(pagesMenuOption);
+					break;
+					case "debug":
+						__debugMenu = new WwMenu(menu_xml);
+						__scene.addChild(__debugMenu);
+						__debugMenu.setOptionFunction(debugMenuOption);
+					break;	
 					default:
 				}
 				
@@ -131,11 +147,79 @@ package org.wwlib.starling.menu
 			}
 		}
 		
-		public function colorMenuOption(value:String):void
+		public function colorsMenuOption(value:String):void
 		{
 			__debug.msg("colorMenuOption: " + value);
 			
 			__scene.brushColorFromString = value;
+		}
+		
+		public function brushesMenuOption(value:String):void
+		{
+			__debug.msg("brushMenuOption: " + value);
+			
+			switch (value) 
+			{
+				case "brush1":
+					__scene.brush = __brush1.image;
+					__scene.roatateBrush = false;
+				break;
+				case "brush2":
+					__scene.brush = __brush2.image;
+					__scene.roatateBrush = true;
+				break;
+				case "brush3":
+					__scene.brush = __brush3.image;
+					__scene.roatateBrush = false;
+				break;
+				default:
+			}
+			
+		}
+		
+		public function pagesMenuOption(value:String):void
+		{
+			__debug.msg("pagesMenuOption: " + value);
+			
+			
+		}
+		
+		public function debugMenuOption(value:String):void
+		{
+			__debug.msg("debugMenuOption: " + value);
+			switch (value) 
+			{
+				case "btn1":
+					__debug.show = !__debug.show;
+				break;
+				case "btn2":
+					__debug.clear();
+				break;
+				case "btn3":
+					if (__debug.alpha < 1)
+					{
+						__debug.alpha = 1;
+					}
+					else
+					{
+						__debug.alpha = .5;
+					}
+				break;
+				default:
+			}
+			
+			
+		}
+		
+		public function loadBrushes():void
+		{
+			__brush1 = new WwBrush();
+			__brush2 = new WwBrush();
+			__brush3 = new WwBrush();
+			
+			__brush1.loadImage("assets/menus/brushes/brush_calligraphy.png");
+			__brush2.loadImage("assets/menus/brushes/brush_circleSoft.png");
+			__brush3.loadImage("assets/menus/brushes/brush_crayon.png");
 		}
 	}
 }

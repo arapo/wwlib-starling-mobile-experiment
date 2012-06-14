@@ -8,14 +8,20 @@
 	</menu>
 	<menu id="brushes" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
 		<tab x="146" y="526" img_url="assets/menus/icons/tab_brushes.png" />
-		<option id="quill" value="BrushQuill"  img_url="assets/menus/icons/brush_quill.png" x="33" y="79" />
-		<option id="sand" value="BrushSand"  img_url="assets/menus/icons/brush_sand.png" x="178" y="79" />
-		<option id="slime" value="BrushSlime"  img_url="assets/menus/icons/brush_slime.png" x="323" y="79" />
+		<option id="quill" value="brush1"  img_url="assets/menus/icons/brush_quill.png" x="33" y="79" />
+		<option id="sand" value="brush2"  img_url="assets/menus/icons/brush_sand.png" x="178" y="79" />
+		<option id="slime" value="brush3"  img_url="assets/menus/icons/brush_slime.png" x="323" y="79" />
 	</menu>
 	<menu id="pages" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
 		<tab x="257" y="526" img_url="assets/menus/icons/tab_pages.png" />
-		<option id="snail" value="BrushQuill"  img_url="assets/menus/icons/page_snail.png" x="33" y="79" />
-		<option id="crab" value="BrushSand"  img_url="assets/menus/icons/page_crab.png" x="178" y="79" />
-		<option id="seal" value="BrushSlime"  img_url="assets/menus/icons/page_seal.png" x="323" y="79" />
+		<option id="snail" value="Snail"  img_url="assets/menus/icons/page_snail.png" x="33" y="79" />
+		<option id="crab" value="Crab"  img_url="assets/menus/icons/page_crab.png" x="178" y="79" />
+		<option id="seal" value="Seal"  img_url="assets/menus/icons/page_seal.png" x="323" y="79" />
+	</menu>
+	<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/debug_tab.png" transition="linear">
+		<tab x="0" y="0" img_url="assets/menus/icons/debug_tab.png" />
+		<option id="btn1" value="btn1"  img_url="assets/menus/icons/debug_btn1.png" x="25" y="50" />
+		<option id="btn2" value="btn2"  img_url="assets/menus/icons/debug_btn2.png" x="25" y="100" />
+		<option id="btn3" value="btn3"  img_url="assets/menus/icons/debug_btn3.png" x="25" y="150" />
 	</menu>
 </menus>

@@ -11,7 +11,7 @@ package
     
     import starling.core.Starling;
     
-    [SWF(width="480", height="320", frameRate="60", backgroundColor="#228888")]
+    [SWF(width="480", height="320", frameRate="60", backgroundColor="#000000")]
     public class Startup extends Sprite
     {
         private var mStarling:Starling;
@@ -25,7 +25,6 @@ package
             stage.align = StageAlign.TOP_LEFT;
             WwDebug.init(stage);
 			__debug = WwDebug.instance;
-			__debug.show = false;
 			
 			
             Starling.multitouchEnabled = true; // useful on mobile devices

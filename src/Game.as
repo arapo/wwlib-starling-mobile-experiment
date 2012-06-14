@@ -60,7 +60,10 @@ package
             mMainMenu.addChild(logo);
             
             var scenesToCreate:Array = [
-                ["Render Texture", RenderTextureScene],
+                ["Coloring Demo", RenderTextureScene]
+				
+			];
+			/*
 				["Textures", TextureScene],
                 ["Multitouch", TouchScene],
                 ["TextFields", TextScene],
@@ -69,6 +72,7 @@ package
                 ["Movie Clip", MovieScene],
                 ["Benchmark", BenchmarkScene]
             ];
+			*/
             
             var buttonTexture:Texture = Assets.getTexture("ButtonBig");
             var count:int = 0;

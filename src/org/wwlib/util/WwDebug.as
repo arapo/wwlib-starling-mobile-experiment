@@ -69,6 +69,7 @@ package org.wwlib.util
 			__debugText.alpha = 0.50;
             __debugText.autoSize = TextFieldAutoSize.LEFT;
             __stage.addChild(__debugText);
+			show = false;
 			//msg("debugText");
 
 		}
@@ -88,6 +89,11 @@ package org.wwlib.util
 			__debugText.visible = flag;
 		}
 		
+		public function get show():Boolean
+		{
+			return __debugText.visible;
+		}
+		
 		public function msg(_msg:String, level:String = "GENERAL"):void
 		{
 			if (__SHOW_DEBUG_MESSAGES)
@@ -99,6 +105,11 @@ package org.wwlib.util
 		public function set alpha(a:Number):void
 		{
 			__debugText.alpha = a;
+		}
+		
+		public function get alpha():Number
+		{
+			return __debugText.alpha;
 		}
 	}
 
