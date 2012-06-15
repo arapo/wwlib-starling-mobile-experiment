@@ -39,6 +39,10 @@ package scenes
 		private var __debug:WwDebug;
 		private var __activeColor:uint;
 		private var __rotateBrush:Boolean = true;
+		private var __brushBehavior:String;
+		private var __scalevar:Number = 0;
+		
+		
         
         public function RenderTextureScene()
         {
@@ -72,6 +76,8 @@ package scenes
 			__menuManager = WwMenuManager.init(this);
 			__menuManager.loadXML();
         }
+		
+		
         
         private function onTouch(event:TouchEvent):void
         {
@@ -84,7 +90,7 @@ package scenes
             mRenderTexture.drawBundled(function():void
             {
                 var touches:Vector.<Touch> = event.getTouches(mCanvasFG);
-            
+				
                 for each (var touch:Touch in touches)
                 {
                     if (touch.phase == TouchPhase.BEGAN)
@@ -98,10 +104,41 @@ package scenes
                     mBrush.y = location.y;
                     //mBrush.color = mColors[touch.id];
                     //mBrush.color = 000000;
-					if (__rotateBrush)
+					
+					
+					switch (__brushBehavior) 
 					{
-						mBrush.rotation = Math.random() * Math.PI * 2.0;
+						case "rotate_random":
+							mBrush.rotation = Math.random() * Math.PI * 2.0;
+						break;
+						
+						case "rotate_normal":
+							mBrush.rotation +=  1*((2*Math.PI)/360);
+						break;
+						
+						case "rotate_normal20x":
+							mBrush.rotation +=  20*((2*Math.PI)/360);
+						break;
+						
+						case "pulse":
+						
+							__scalevar += (Math.PI/20);
+							
+							__debug.msg("scale.x: " + mBrush.scaleX);
+						
+							mBrush.scaleX = (Math.sin(__scalevar)+2)/4;
+							mBrush.scaleY = (Math.sin(__scalevar)+2)/4;
+						break;
+						
+						case "dash":
+							
+						
+							
+					default:
+						
+						
 					}
+					
                     
                     mRenderTexture.draw(mBrush);
                 }
@@ -136,9 +173,9 @@ package scenes
 			mBrush.color = __activeColor;
 		}
 		
-		public function set roatateBrush(f:Boolean):void
+		public function set brushBehavior(s:String):void
 		{
-			__rotateBrush = f;
+			__brushBehavior = s;
 		}
         
         public override function dispose():void

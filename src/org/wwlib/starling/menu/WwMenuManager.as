@@ -39,7 +39,8 @@ package org.wwlib.starling.menu
 		private var __brush1:WwSprite;
 		private var __brush2:WwSprite;
 		private var __brush3:WwSprite;
-				
+		private var __brush4:WwSprite;
+		private var __brush5:WwSprite;
 		/**
 		*   Construct the WwMenuManager. This class is a Singleton, so it should not
 		*   be directly instantiated. Instead, call the static "instance" getter
@@ -162,16 +163,23 @@ package org.wwlib.starling.menu
 			{
 				case "brush1":
 					__scene.brush = __brush1.image;
-					__scene.roatateBrush = false;
+					__scene.brushBehavior = "";
 				break;
 				case "brush2":
 					__scene.brush = __brush2.image;
-					__scene.roatateBrush = true;
+					__scene.brushBehavior = "rotate_random";
 				break;
 				case "brush3":
 					__scene.brush = __brush3.image;
-					__scene.roatateBrush = false;
+					__scene.brushBehavior = "";
 				break;
+				case "brush4":
+					__scene.brush = __brush4.image;
+					__scene.brushBehavior = "pulse";
+				break;
+				case "brush5":
+					__scene.brush = __brush5.image;
+					__scene.brushBehavior = "rotate_normal20x";
 				default:
 			}
 			
@@ -216,10 +224,14 @@ package org.wwlib.starling.menu
 			__brush1 = new WwBrush();
 			__brush2 = new WwBrush();
 			__brush3 = new WwBrush();
+			__brush4 = new WwBrush();
+			__brush5 = new WwBrush();
 			
 			__brush1.loadImage("assets/menus/brushes/brush_calligraphy.png");
 			__brush2.loadImage("assets/menus/brushes/brush_circleSoft.png");
 			__brush3.loadImage("assets/menus/brushes/brush_crayon.png");
+			__brush4.loadImage("assets/menus/brushes/brush_circle.png");
+			__brush5.loadImage("assets/menus/brushes/brush_spiral.png");
 		}
 	}
 }
