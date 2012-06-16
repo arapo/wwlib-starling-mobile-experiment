@@ -222,6 +222,8 @@ package scenes
 				break;
 				
 				default: 
+					__brushDynamicColor = "";
+				
 					__activeColor =  uint(hex_color);
 					mBrush.color = __activeColor;
 					__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.color); 
