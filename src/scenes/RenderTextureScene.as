@@ -57,6 +57,9 @@ package scenes
 		private var __frequency:Number = 0;
 		private var __amplitude:Number = 0;
 		private var __center:Number = 0;
+		
+		private var __prevx:Number=0;
+		private var __prevy:Number=0;
         
         public function RenderTextureScene()
         {
@@ -182,7 +185,15 @@ package scenes
 						break;
 						
 						case "dash":
-							
+						
+							__debug.msg("rotation" + mBrush.rotation)
+						
+							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+						
+							__prevx = location.x;
+							__prevy = location.y;
+						break;
+					
 						default:
 						
 					}
