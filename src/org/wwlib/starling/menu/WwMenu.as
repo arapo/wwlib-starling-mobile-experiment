@@ -38,7 +38,7 @@ package org.wwlib.starling.menu
 			__xOn = xml.@x_on * __scaleFactor;
 			__yOn = xml.@y_on * __scaleFactor;
 			__transition = xml.@transition;
-			__transition = Transitions.EASE_OUT_BOUNCE;
+			__transition = Transitions.EASE_IN_OUT;
 			
 			x = __xOff;
 			y = __yOff;
