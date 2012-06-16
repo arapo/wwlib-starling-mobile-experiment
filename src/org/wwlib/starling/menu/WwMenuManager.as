@@ -165,27 +165,36 @@ package org.wwlib.starling.menu
 				case "brush1":
 					__scene.brush = __brush1.image;
 					__scene.brushBehavior = "";
+	
 				break;
 				case "brush2":
 					__scene.brush = __brush2.image;
 					__scene.brushBehavior = "rotate_random";
+					
 				break;
 				case "brush3":
 					__scene.brush = __brush3.image;
 					__scene.brushBehavior = "";
+					
 				break;
 				case "brush4":
 					__scene.brush = __brush4.image;
 					__scene.brushBehavior = "";
+					
 				break;
 				case "brush5":
 					__scene.brush = __brush5.image;
 					__scene.brushBehavior = "rotate_normal20x";
+			
+				break;
 				case "brush6":
 					__scene.brush = __brush6.image;
 					__scene.brushBehavior = "pulse";
+				
+				break;
 				default:
 			}
+		
 			
 		}
 		
