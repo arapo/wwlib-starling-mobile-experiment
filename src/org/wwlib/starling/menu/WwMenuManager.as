@@ -170,12 +170,12 @@ package org.wwlib.starling.menu
 				break;
 				case "brush2":
 					__scene.brush = __brush2.image;
-					__scene.brushBehavior = "rotate_random";
+					__scene.brushBehavior = "";
 					
 				break;
 				case "brush3":
 					__scene.brush = __brush3.image;
-					__scene.brushBehavior = "";
+					__scene.brushBehavior = "rotate_random";
 					
 				break;
 				case "brush4":
@@ -195,7 +195,7 @@ package org.wwlib.starling.menu
 				break;
 				case "brush7":
 					__scene.brush = __brush7.image;
-					__scene.brushBehavior = "dash";
+					__scene.brushBehavior = "interval_dash";
 				default:
 			}
 		
@@ -252,7 +252,8 @@ package org.wwlib.starling.menu
 			__brush4.loadImage("assets/menus/brushes/brush_circle.png");
 			__brush5.loadImage("assets/menus/brushes/brush_spiral.png");
 			__brush6.loadImage("assets/menus/brushes/brush_circle.png");
-			__brush7.loadImage("assets/menus/brushes/brush_arrow.png");
+			//__brush7.loadImage("assets/menus/brushes/brush_arrow.png");
+			__brush7.loadImage("assets/menus/brushes/brush_webbed_feet.png");
 		}
 	}
 }

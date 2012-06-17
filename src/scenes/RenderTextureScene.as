@@ -59,7 +59,13 @@ package scenes
 		private var __center:Number = 0;
 		
 		private var __prevx:Number=0;
-		private var __prevy:Number=0;
+		private var __prevy:Number = 0;
+		
+		private var __dashinterval:Number = 0;
+		private var __dashvar:Number = 0;
+		
+		private var __dashinterval2:Number = 0;
+		private var __dashvar2:Number = 0;
         
         public function RenderTextureScene()
         {
@@ -128,8 +134,10 @@ package scenes
 							
 							/*** http://krazydad.com/tutorials/makecolors.php ***/
 						
-						
-							__rainbowvar += (2 * Math.PI) / 30;
+							if (mBrush.alpha == 1)
+								{
+									__rainbowvar += (2 * Math.PI) / 30;
+								}
 							
 							__frequency = 1;
 							
@@ -153,8 +161,12 @@ package scenes
 						break;
 						
 						case "random_rainbow":
-						
-							__colorvar += 1000000;
+							
+							if (mBrush.alpha == 1)
+								{
+									__colorvar += 1000000;
+								}
+								
 							mBrush.color = __colorvar;
 							
 						break;
@@ -164,6 +176,16 @@ package scenes
 					
 					switch (__brushBehavior) 
 					{
+						case "scale.25":
+							mBrush.scaleX = .25;
+							mBrush.scaleY = .25;
+						break;
+						
+						case "scale1":
+							mBrush.scaleX = 1;
+							mBrush.scaleY = 1;
+						break;
+							
 						case "rotate_random":
 							mBrush.rotation = Math.random() * Math.PI * 2.0;
 						break;
@@ -185,13 +207,46 @@ package scenes
 						break;
 						
 						case "dash":
-						
-							__debug.msg("rotation" + mBrush.rotation)
-						
 							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
 						
 							__prevx = location.x;
 							__prevy = location.y;
+						break;
+						
+						case "interval_dash":
+						
+							__dashinterval = 10;
+							
+							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+						
+							if (__dashvar > 0) { __dashvar--; }
+							if (__dashvar == 0) 
+								{
+									__prevx = location.x;
+									__prevy = location.y;
+									mBrush.alpha = 1;
+									__dashvar = __dashinterval; 
+								}
+							else { mBrush.alpha = 0; }
+						
+						break;
+						
+						case "interval_dash_2step":
+						
+							__dashinterval2 = 10;
+							
+							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+						
+							if (__dashvar2 > 0) { __dashvar2--; }
+							if (__dashvar2 == 0) 
+								{
+									__prevx = location.x;
+									__prevy = location.y;
+									mBrush.alpha = 1;
+									__dashvar2 = __dashinterval2; 
+								}
+							else { mBrush.alpha = 0; }
+						
 						break;
 					
 						default:
