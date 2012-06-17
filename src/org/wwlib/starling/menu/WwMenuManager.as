@@ -103,8 +103,8 @@ package org.wwlib.starling.menu
 		
 		private function initMenusWithXML(xml:XML):void
 		{
-			__debug.clear();
-			__debug.msg("initMenusWithXML: ");
+			//__debug.clear();
+			//__debug.msg("initMenusWithXML: ");
 			
 			__menuXMLList = xml.menu;
 			var menu_xml:XML;
@@ -181,6 +181,22 @@ package org.wwlib.starling.menu
 		{
 			__debug.msg("pagesMenuOption: " + value);
 			
+			switch (value) 
+			{
+				case "Snail":
+					__scene.page = "assets/coloring_pages/sullivan_snail_960_8bit.png";
+				break;
+				case "Octopus":
+					__scene.page = "assets/coloring_pages/sullivan_octopus_960_8bit.png";
+				break;
+				case "Seal":
+					__scene.page = "assets/coloring_pages/sullivan_seal_960_8bit.png";
+				break;
+				case "Blank":
+					__scene.page = "assets/coloring_pages/blank_960.png";
+				break;
+				default:
+			}
 			
 		}
 		

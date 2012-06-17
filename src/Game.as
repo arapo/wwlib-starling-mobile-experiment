@@ -3,6 +3,8 @@ package
     import flash.ui.Keyboard;
     import flash.utils.getDefinitionByName;
     import flash.utils.getQualifiedClassName;
+	import org.wwlib.starling.WwSprite;
+	import org.wwlib.util.WwDeviceInfo;
     
     import scenes.AnimationScene;
     import scenes.BenchmarkScene;
@@ -30,6 +32,8 @@ package
         private var mMainMenu:Sprite;
         private var mCurrentScene:Scene;
         
+		private var __bg:WwSprite;
+		
         public function Game()
         {
             // The following settings are for mobile development (iOS, Android):
@@ -38,8 +42,8 @@ package
             // then run on a device with a different resolution, and the assets class will
             // provide textures in the most suitable format.
             
-            Starling.current.stage.stageWidth  = 480;
-            Starling.current.stage.stageHeight = 320;
+            Starling.current.stage.stageWidth  = WwDeviceInfo.instance.width;
+            Starling.current.stage.stageHeight =  WwDeviceInfo.instance.height;
             Assets.contentScaleFactor = Starling.current.contentScaleFactor;
             
             // load general assets
@@ -48,10 +52,10 @@ package
             Assets.loadBitmapFonts();
             
             // create and show menu screen
-            
-            var bg:Image = new Image(Assets.getTexture("Background"));
-            bg.blendMode = BlendMode.NONE;
-            addChild(bg);
+			
+			__bg = new WwSprite();
+			__bg.loadImage("assets/coloring_pages/background_960.png");
+			addChild(__bg);
             
             mMainMenu = new Sprite();
             addChild(mMainMenu);
@@ -97,6 +101,7 @@ package
             
             // show information about rendering method (hardware/software)
             
+			/*
             var driverInfo:String = Starling.context.driverInfo;
             var infoText:TextField = new TextField(310, 64, driverInfo, "Verdana", 10);
             infoText.x = 5;
@@ -104,6 +109,7 @@ package
             infoText.vAlign = VAlign.BOTTOM;
             infoText.touchable = false;
             mMainMenu.addChild(infoText);
+			*/
         }
         
         private function onAddedToStage(event:Event):void

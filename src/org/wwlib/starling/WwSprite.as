@@ -24,12 +24,14 @@ package org.wwlib.starling
 	 */
 	public class WwSprite extends Sprite
 	{
+		public  static var __baseScaleFactor:Number = 0.5;
+		
 		protected var __img:Image;
 		protected var __x:int;
 		protected var __y:int;
 		protected var __bmp:Bitmap;
 		protected var __debug:WwDebug = WwDebug.instance;
-		protected var __scaleFactor:Number = 0.5;
+		protected var __scaleFactor:Number = WwSprite.__baseScaleFactor;
 		protected var __url:String;
 		
 		public function WwSprite() 
@@ -63,6 +65,7 @@ package org.wwlib.starling
 		{
 			//__debug.msg("onImageLoaded: "+ __url);
 			__bmp = event.target.content as Bitmap;
+			removeChild(__img);
 			__img = Image.fromBitmap(__bmp);
 			__img.scaleX = __scaleFactor;
 			__img.scaleY = __scaleFactor;

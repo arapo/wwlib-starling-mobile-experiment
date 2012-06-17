@@ -12,17 +12,17 @@ package scenes
         
         public function Scene()
         {
-            mBackButton = new Button(Assets.getTexture("ButtonBack"), "Back");
-            mBackButton.x = Constants.CenterX - mBackButton.width / 2;
-            mBackButton.y = Constants.GameHeight - mBackButton.height + 1;
-            mBackButton.addEventListener(Event.TRIGGERED, onBackButtonTriggered);
-            addChild(mBackButton);
+            //mBackButton = new Button(Assets.getTexture("ButtonBack"), "Back");
+            //mBackButton.x = Constants.CenterX - mBackButton.width / 2;
+            //mBackButton.y = Constants.GameHeight - mBackButton.height + 1;
+            //mBackButton.addEventListener(Event.TRIGGERED, onBackButtonTriggered);
+            //addChild(mBackButton);
         }
         
         private function onBackButtonTriggered(event:Event):void
         {
-            mBackButton.removeEventListener(Event.TRIGGERED, onBackButtonTriggered);
-            dispatchEvent(new Event(CLOSING, true));
+            //mBackButton.removeEventListener(Event.TRIGGERED, onBackButtonTriggered);
+            //dispatchEvent(new Event(CLOSING, true));
         }
     }
 }

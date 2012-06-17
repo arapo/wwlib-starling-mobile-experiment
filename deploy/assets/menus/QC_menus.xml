@@ -15,8 +15,9 @@
 	<menu id="pages" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
 		<tab x="257" y="526" img_url="assets/menus/icons/tab_pages.png" />
 		<option id="snail" value="Snail"  img_url="assets/menus/icons/page_snail.png" x="33" y="79" />
-		<option id="crab" value="Crab"  img_url="assets/menus/icons/page_crab.png" x="178" y="79" />
+		<option id="octopus" value="Octopus"  img_url="assets/menus/icons/page_octopus.png" x="178" y="79" />
 		<option id="seal" value="Seal"  img_url="assets/menus/icons/page_seal.png" x="323" y="79" />
+		<option id="blank" value="Blank"  img_url="assets/menus/icons/page_blank.png" x="468" y="79" />
 	</menu>
 	<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/debug_tab.png" transition="linear">
 		<tab x="0" y="0" img_url="assets/menus/icons/debug_tab.png" />
