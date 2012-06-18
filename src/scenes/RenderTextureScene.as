@@ -22,6 +22,9 @@ package scenes
 	import starling.core.Starling;
 	import starling.utils.Color;
 	import starling.utils.deg2rad;
+	import starling.display.MovieClip;
+	import flash.media.Sound;
+	import starling.textures.Texture;
 
     public class RenderTextureScene extends Scene
     {
@@ -56,7 +59,9 @@ package scenes
 		private var __center:Number = 0;
 		
 		private var __prevx:Number=0;
-		private var __prevy:Number=0;
+		private var __prevy:Number = 0;
+		
+		private var mMovie:MovieClip;
         
         public function RenderTextureScene()
         {
@@ -94,9 +99,37 @@ package scenes
 							
 			__menuManager = WwMenuManager.init(this);
 			__menuManager.loadXML();
+			
+			//Movie Test
+			var frames:Vector.<Texture> = Assets.getTextureAtlas().getTextures("flight");
+            mMovie = new MovieClip(frames, 15);
+            
+            // add sounds
+            var stepSound:Sound = Assets.getSound("Step");
+            mMovie.setFrameSound(2, stepSound);
+            
+            // move the clip to the center and add it to the stage
+            mMovie.x = WwDeviceInfo.instance.width - mMovie.width;// - (20 * WwDeviceInfo.instance.assetScaleFactor);
+            mMovie.y = (20 * WwDeviceInfo.instance.assetScaleFactor);
+			mMovie.scaleX = .5;
+			mMovie.scaleY = .5;
+            addChild(mMovie);
+			
+            // like any animation, the movie needs to be added to the juggler!
+            // this is the recommended way to do that.
+            addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+            addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
         }
 		
-		
+        private function onAddedToStage(event:Event):void
+        {
+            Starling.juggler.add(mMovie);
+        }
+        
+        private function onRemovedFromStage(event:Event):void
+        {
+            Starling.juggler.remove(mMovie);
+        }
         
         private function onTouch(event:TouchEvent):void
         {
@@ -270,8 +303,11 @@ package scenes
         
         public override function dispose():void
         {
+			removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+            removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             mRenderTexture.dispose();
             super.dispose();
         }
+
     }
 }
