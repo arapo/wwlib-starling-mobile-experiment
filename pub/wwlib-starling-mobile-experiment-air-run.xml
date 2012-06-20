@@ -12,8 +12,8 @@
 		<resizable>false</resizable>
 		<maximizable>false</maximizable>
         <transparent>false</transparent>
-        <width>480</width>
-        <height>350</height>
+        <width>1024</width>
+        <height>798</height>
 		<x>100</x>
 		<y>100</y>
     </initialWindow>

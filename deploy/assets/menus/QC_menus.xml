@@ -4,8 +4,8 @@
 		<tab x="33" y="526" img_url="assets/menus/icons/tab_colors.png" />
 		<option id="lobster_red" value="0xf66b05"  img_url="assets/menus/icons/color_orange_f66b05.png" x="33" y="79" />
 		<option id="sky_blue" value="0x05b0f6"  img_url="assets/menus/icons/color_ltBlue_05b0f6.png" x="178" y="79" />
-		<option id="rainbow" value="rainbow"  img_url="assets/menus/icons/rainbow_icon.png" x="323" y="79" />
-		<option id="random_rainbow" value="random_rainbow"  img_url="assets/menus/icons/randrainbow_icon.png" x="468" y="79" />
+		<option id="rainbow" value="rainbow"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="79" />
+		<option id="random_rainbow" value="random_rainbow"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="79" />
 		<option id="seaweed_green" value="0x000000"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="79" />
 		<option id="seaweed_green" value="0xFFFFFF"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="79" />
 		
@@ -50,8 +50,9 @@
 	<menu id="pages" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
 		<tab x="257" y="526" img_url="assets/menus/icons/tab_pages.png" />
 		<option id="snail" value="Snail"  img_url="assets/menus/icons/page_snail.png" x="33" y="79" />
-		<option id="crab" value="Crab"  img_url="assets/menus/icons/page_crab.png" x="178" y="79" />
+		<option id="octopus" value="Octopus"  img_url="assets/menus/icons/page_octopus.png" x="178" y="79" />
 		<option id="seal" value="Seal"  img_url="assets/menus/icons/page_seal.png" x="323" y="79" />
+		<option id="blank" value="Blank"  img_url="assets/menus/icons/page_blank.png" x="468" y="79" />
 	</menu>
 	<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/debug_tab.png" transition="linear">
 		<tab x="0" y="0" img_url="assets/menus/icons/debug_tab.png" />

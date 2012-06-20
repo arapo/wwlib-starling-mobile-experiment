@@ -50,7 +50,7 @@ package scenes
             
             mTransitionLabel = new TextField(320, 30, "");
             mTransitionLabel.y = mDelayButton.y + 40;
-            mTransitionLabel.alpha = 1; // invisible, will be shown later
+            mTransitionLabel.alpha = 0.0; // invisible, will be shown later
             addChild(mTransitionLabel);
 			
 		
