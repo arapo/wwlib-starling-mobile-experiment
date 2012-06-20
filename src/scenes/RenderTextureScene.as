@@ -119,6 +119,9 @@ package scenes
                     if (touch.phase == TouchPhase.BEGAN)
                         mColors[touch.id] = Math.random() * uint.MAX_VALUE;
 						
+						__debug.msg("touchphase.Began" + [touch.id]);
+						
+						
                     if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
                         continue;
                     
