@@ -61,6 +61,12 @@ package scenes
 		private var __prevx:Number=0;
 		private var __prevy:Number = 0;
 		
+		private var __dashinterval:Number = 0;
+		private var __dashvar:Number = 0;
+		
+		private var __dashinterval2:Number = 0;
+		private var __dashvar2:Number = 0;
+		
 		private var mMovie:MovieClip;
         
         public function RenderTextureScene()
@@ -105,8 +111,8 @@ package scenes
             mMovie = new MovieClip(frames, 15);
             
             // add sounds
-            var stepSound:Sound = Assets.getSound("Step");
-            mMovie.setFrameSound(2, stepSound);
+            //var stepSound:Sound = Assets.getSound("Step");
+            //mMovie.setFrameSound(2, stepSound);
             
             // move the clip to the center and add it to the stage
             mMovie.x = WwDeviceInfo.instance.width - mMovie.width;// - (20 * WwDeviceInfo.instance.assetScaleFactor);
@@ -146,6 +152,9 @@ package scenes
                     if (touch.phase == TouchPhase.BEGAN)
                         mColors[touch.id] = Math.random() * uint.MAX_VALUE;
 						
+						__debug.msg("touchphase.Began" + [touch.id]);
+						
+						
                     if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
                         continue;
                     
@@ -160,9 +169,12 @@ package scenes
 						{
 							case "rainbow":
 								
-								/*** http://krazydad.com/tutorials/makecolors.php ***/
-							
+							/*** http://krazydad.com/tutorials/makecolors.php ***/
+								
+								if (mBrush.alpha == 1)
+								{
 								__rainbowvar += (2 * Math.PI) / 30;
+								}
 								
 								__frequency = 1;
 								
@@ -186,8 +198,11 @@ package scenes
 							break;
 							
 							case "random_rainbow":
-							
+								
+							if (mBrush.alpha == 1)
+							{
 								__colorvar += 1000000;
+							}
 								mBrush.color = __colorvar;
 								
 							break;
@@ -227,18 +242,57 @@ package scenes
 								__prevy = location.y;
 							break;
 						
-							default:
+					
 							
-						}
+						case "interval_dash":
 						
-						mRenderTexture.draw(mBrush);
+							__dashinterval = 10;
+							
+							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+						
+							if (__dashvar > 0) { __dashvar--; }
+							if (__dashvar == 0) 
+								{
+									__prevx = location.x;
+									__prevy = location.y;
+									mBrush.alpha = 1;
+									__dashvar = __dashinterval; 
+								}
+							else { mBrush.alpha = 0; }
+						
+						break;
+						
+						case "interval_dash_2step":
+						
+							__dashinterval2 = 10;
+							
+							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+						
+							if (__dashvar2 > 0) { __dashvar2--; }
+							if (__dashvar2 == 0) 
+								{
+									__prevx = location.x;
+									__prevy = location.y;
+									mBrush.alpha = 1;
+									__dashvar2 = __dashinterval2; 
+								}
+							else { mBrush.alpha = 0; }
+						
+						break;
+					
+						default:
+						
 					}
+					
+                    
+                    mRenderTexture.draw(mBrush);
+                  }
 				}
-			});
-		}
-			
-		private function onButtonTriggered(event:Event):void
-		{
+            });
+        }     
+        
+        private function onButtonTriggered(event:Event):void
+        {
 			if (mBrush != null)
 			{
 				if (mBrush.blendMode == BlendMode.NORMAL)

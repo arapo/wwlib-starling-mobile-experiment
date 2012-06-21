@@ -6,8 +6,8 @@
 		<option id="sky_blue" value="0x05b0f6"  img_url="assets/menus/icons/color_ltBlue_05b0f6.png" x="178" y="79" />
 		<option id="rainbow" value="rainbow"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="79" />
 		<option id="random_rainbow" value="random_rainbow"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="79" />
-		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="79" />
-		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="79" />
+		<option id="seaweed_green" value="0x000000"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="79" />
+		<option id="seaweed_green" value="0xFFFFFF"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="79" />
 		
 		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="33" y="224" />
 		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="178" y="224" />
