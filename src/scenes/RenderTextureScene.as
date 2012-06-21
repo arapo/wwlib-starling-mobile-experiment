@@ -152,7 +152,7 @@ package scenes
                     if (touch.phase == TouchPhase.BEGAN)
                         mColors[touch.id] = Math.random() * uint.MAX_VALUE;
 						
-						__debug.msg("touchphase.Began" + [touch.id]);
+						
 						
 						
                     if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
@@ -313,21 +313,29 @@ package scenes
 		{
 			__activeColor =  uint(hex_color);
 			if (mBrush != null)
-			{			
+			{		
+				
 				switch (hex_color)
 				{
 					
 					case "rainbow":
 						__brushDynamicColor = "rainbow";
+						
 					break;
 					
 					case "random_rainbow":
 						__brushDynamicColor = "random_rainbow";
+						
 					break;
 					
-					default: 
+					case "erase":
+						
 						__brushDynamicColor = "";
+						
 					
+					
+					default: 
+						__brushDynamicColor = "";					
 						//__activeColor =  uint(hex_color);
 						mBrush.color = __activeColor;
 						__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.color); 
