@@ -4,6 +4,7 @@ package scenes
     import flash.geom.Point;
     import flash.utils.Dictionary;
 	import org.wwlib.starling.menu.WwMenuManager;
+	import org.wwlib.starling.WwBrush;
 	import org.wwlib.starling.WwSprite;
 	import org.wwlib.util.WwDebug;
 	import org.wwlib.util.WwDeviceInfo;
@@ -30,7 +31,7 @@ package scenes
     {
         private var mRenderTexture:RenderTexture;
         private var mCanvas:Image;
-        private var mBrush:Image;
+        private var mBrush:WwBrush;
         private var mButton:Button;
         private var mColors:Dictionary;
 		
@@ -68,6 +69,10 @@ package scenes
 		private var __dashvar2:Number = 0;
 		
 		private var mMovie:MovieClip;
+		
+		private var __expandscale:Number = 0;
+		
+		private var __blendmode:String;
         
         public function RenderTextureScene()
         {
@@ -91,17 +96,10 @@ package scenes
             //mBrush.pivotX = mBrush.width / 2;
             //mBrush.pivotY = mBrush.height / 2;
             //mBrush.blendMode = BlendMode.NORMAL;
-            
-            mButton = new Button(Assets.getTexture("ButtonNormal"), "Draw");
-            mButton.x = 14 / WwDeviceInfo.instance.scale;  //TODO: fix scale for iphone.
-            mButton.y = 580 / WwDeviceInfo.instance.scale;
-            mButton.addEventListener(Event.TRIGGERED, onButtonTriggered);
-			mButton.width = 75;
-            addChild(mButton);
-			
-			__transitions = [Transitions.LINEAR, Transitions.EASE_OUT, Transitions.EASE_IN_OUT,
-                            Transitions.EASE_OUT_BACK, Transitions.EASE_OUT_BOUNCE,
-                            Transitions.EASE_OUT_ELASTIC];
+  
+			//__transitions = [Transitions.LINEAR, Transitions.EASE_OUT, Transitions.EASE_IN_OUT,
+            //                Transitions.EASE_OUT_BACK, Transitions.EASE_OUT_BOUNCE,
+            //                Transitions.EASE_OUT_ELASTIC];
 							
 			__menuManager = WwMenuManager.init(this);
 			__menuManager.loadXML();
@@ -150,7 +148,10 @@ package scenes
                 for each (var touch:Touch in touches)
                 {
                     if (touch.phase == TouchPhase.BEGAN)
-                        mColors[touch.id] = Math.random() * uint.MAX_VALUE;
+					{
+						__expandscale = 0;
+					
+					}	
 						
 						
 						
@@ -161,9 +162,21 @@ package scenes
                     var location:Point = touch.getLocation(__coloringPage);
 					if (mBrush != null)
 					{
+						
+						switch(__blendmode)
+						{
+							case "erase": mBrush.image.blendMode = BlendMode.ERASE;
+							break;
+							
+							case "normal": mBrush.image.blendMode = BlendMode.NORMAL;
+							break;
+							
+							default: mBrush.image.blendMode = BlendMode.NORMAL;
+							break;
+						}
 
-						mBrush.x = location.x;
-						mBrush.y = location.y;
+						mBrush.image.x = location.x;
+						mBrush.image.y = location.y;
 						
 						switch(__brushDynamicColor)
 						{
@@ -171,7 +184,7 @@ package scenes
 								
 							/*** http://krazydad.com/tutorials/makecolors.php ***/
 								
-								if (mBrush.alpha == 1)
+								if (mBrush.image.alpha == 1)
 								{
 								__rainbowvar += (2 * Math.PI) / 30;
 								}
@@ -193,17 +206,17 @@ package scenes
 								__green = Math.sin(__frequency * __rainbowvar + __offset2) * __amplitude + __center; 
 								__blue = Math.sin(__frequency * __rainbowvar + __offset3) * __amplitude + __center; 
 								
-								mBrush.color = Color.rgb(__red, __green, __blue);
+								mBrush.image.color = Color.rgb(__red, __green, __blue);
 							
 							break;
 							
 							case "random_rainbow":
 								
-							if (mBrush.alpha == 1)
+							if (mBrush.image.alpha == 1)
 							{
 								__colorvar += 1000000;
 							}
-								mBrush.color = __colorvar;
+								mBrush.image.color = __colorvar;
 								
 							break;
 							
@@ -213,30 +226,43 @@ package scenes
 						switch (__brushBehavior) 
 						{
 							case "rotate_random":
-								mBrush.rotation = Math.random() * Math.PI * 2.0;
+								
+								mBrush.resetScale();
+								
+								mBrush.image.rotation = Math.random() * Math.PI * 2.0;
 							break;
 							
 							case "rotate_normal":
-								mBrush.rotation +=  1*((2*Math.PI)/360);
+							
+								mBrush.resetScale();
+							
+								mBrush.image.rotation +=  1*((2*Math.PI)/360);
 							break;
 							
 							case "rotate_normal20x":
-								mBrush.rotation +=  deg2rad(20);
+							
+								mBrush.resetScale();
+							
+								mBrush.image.rotation +=  deg2rad(20);
 							break;
 							
 							case "pulse":
 							
+								mBrush.resetScale();
+							
 								__scalevar += (Math.PI/20);
 							
-								mBrush.scaleX = (Math.sin(__scalevar)+2)/4;
-								mBrush.scaleY = (Math.sin(__scalevar)+2)/4;
+								mBrush.image.scaleX = (Math.sin(__scalevar)+2)/4;
+								mBrush.image.scaleY = (Math.sin(__scalevar)+2)/4;
 							break;
 							
 							case "dash":
 							
-								__debug.msg("rotation" + mBrush.rotation)
+								mBrush.resetScale();
 							
-								mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+								__debug.msg("rotation" + mBrush.image.rotation)
+							
+								mBrush.image.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
 							
 								__prevx = location.x;
 								__prevy = location.y;
@@ -245,68 +271,62 @@ package scenes
 					
 							
 						case "interval_dash":
+							
+							mBrush.resetScale();
 						
 							__dashinterval = 10;
 							
-							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+							mBrush.image.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
 						
 							if (__dashvar > 0) { __dashvar--; }
 							if (__dashvar == 0) 
 								{
 									__prevx = location.x;
 									__prevy = location.y;
-									mBrush.alpha = 1;
+									mBrush.image.alpha = 1;
 									__dashvar = __dashinterval; 
 								}
-							else { mBrush.alpha = 0; }
+							else { mBrush.image.alpha = 0; }
 						
 						break;
 						
-						case "interval_dash_2step":
-						
+					case "interval_dash_2step":
+							
+							mBrush.resetScale();
 							__dashinterval2 = 10;
 							
-							mBrush.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
+							mBrush.image.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
 						
 							if (__dashvar2 > 0) { __dashvar2--; }
 							if (__dashvar2 == 0) 
 								{
 									__prevx = location.x;
 									__prevy = location.y;
-									mBrush.alpha = 1;
+									mBrush.image.alpha = 1;
 									__dashvar2 = __dashinterval2; 
 								}
-							else { mBrush.alpha = 0; }
+							else { mBrush.image.alpha = 0; }
 						
 						break;
+						
+						case "expand":
+							
+							__expandscale += .02;
+							mBrush.image.scaleX = __expandscale;
+							mBrush.image.scaleY = __expandscale;
+							
+							__debug.msg ("expandscale: " + mBrush.image.scaleX); 
 					
 						default:
 						
 					}
 					
                     
-                    mRenderTexture.draw(mBrush);
+                    mRenderTexture.draw(mBrush.image);
                   }
 				}
             });
         }     
-        
-        private function onButtonTriggered(event:Event):void
-        {
-			if (mBrush != null)
-			{
-				if (mBrush.blendMode == BlendMode.NORMAL)
-				{
-					mBrush.blendMode = BlendMode.ERASE;
-					mButton.text = "Erase";
-				}
-				else
-				{
-					mBrush.blendMode = BlendMode.NORMAL;
-					mButton.text = "Draw";
-				}
-			}
-		}
         
 		
 		public function set brushColorFromString(hex_color:String):void
@@ -319,36 +339,41 @@ package scenes
 				{
 					
 					case "rainbow":
+						__blendmode = "normal";
 						__brushDynamicColor = "rainbow";
 						
 					break;
 					
 					case "random_rainbow":
+						__blendmode = "normal";
 						__brushDynamicColor = "random_rainbow";
+						
 						
 					break;
 					
 					case "erase":
 						
+						__blendmode = "erase";
 						__brushDynamicColor = "";
 						
-					
-					
+					break;
+										
 					default: 
+						__blendmode = "normal";
 						__brushDynamicColor = "";					
 						//__activeColor =  uint(hex_color);
-						mBrush.color = __activeColor;
-						__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.color); 
+						mBrush.image.color = __activeColor;
+						__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.image.color); 
 					break;
 				}
 			}
 		}
 		
-		public function set brush(img:Image):void
+		public function set brush(brush:WwBrush):void
 		{
-			__debug.msg("set: brush: " + img);
-			mBrush = img;
-			mBrush.color = __activeColor;
+			__debug.msg("set: brush: " + brush);
+			mBrush = brush;
+			mBrush.image.color = __activeColor;
 		}
 		
 		public function set page(url:String):void

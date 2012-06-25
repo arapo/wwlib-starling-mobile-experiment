@@ -67,11 +67,16 @@ package org.wwlib.starling
 			__bmp = event.target.content as Bitmap;
 			removeChild(__img);
 			__img = Image.fromBitmap(__bmp);
-			__img.scaleX = __scaleFactor;
-			__img.scaleY = __scaleFactor;
+			resetScale();
 			//__img.alpha = 0.5;
 			addChild(__img);
 			onReady();
+		}
+		
+		public function resetScale():void
+		{
+			__img.scaleX = __scaleFactor;
+			__img.scaleY = __scaleFactor;
 		}
 		
 		// Override this
