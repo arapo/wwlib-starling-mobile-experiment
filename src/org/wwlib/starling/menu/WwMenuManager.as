@@ -25,7 +25,7 @@ package org.wwlib.starling.menu
 		private static var __instance:WwMenuManager;
 		private var __debug:WwDebug;
 		
-		private var __menuXmlURL:String = "assets/menus/QC_menus.xml";
+		private var __menuXmlURL:String = "assets/menus/Config.xml";
 		private var __xml:XML;
 		private var __menuXMLList:XMLList;
 		private var __scene:RenderTextureScene;
@@ -36,13 +36,21 @@ package org.wwlib.starling.menu
 		private var __shopMenu:WwMenu;
 		private var __debugMenu:WwMenu;
 		
-		private var __brush1:WwSprite;
+		/*private var __brush1:WwSprite;
 		private var __brush2:WwSprite;
 		private var __brush3:WwSprite;
 		private var __brush4:WwSprite;
 		private var __brush5:WwSprite;
 		private var __brush6:WwSprite;
-		private var __brush7:WwSprite;
+		private var __brush7:WwSprite;*/
+		
+		private var __brush1:WwBrush;
+		private var __brush2:WwBrush;
+		private var __brush3:WwBrush;
+		private var __brush4:WwBrush;
+		private var __brush5:WwBrush;
+		private var __brush6:WwBrush;
+		private var __brush7:WwBrush;
 		/**
 		*   Construct the WwMenuManager. This class is a Singleton, so it should not
 		*   be directly instantiated. Instead, call the static "instance" getter
@@ -164,37 +172,37 @@ package org.wwlib.starling.menu
 			switch (value) 
 			{
 				case "brush1":
-					__scene.brush = __brush1.image;
+					__scene.brush = __brush1;
 					__scene.brushBehavior = "";
 	
 				break;
 				case "brush2":
-					__scene.brush = __brush2.image;
+					__scene.brush = __brush2;
 					__scene.brushBehavior = "";
 					
 				break;
 				case "brush3":
-					__scene.brush = __brush3.image;
+					__scene.brush = __brush3;
 					__scene.brushBehavior = "rotate_random";
 					
 				break;
 				case "brush4":
-					__scene.brush = __brush4.image;
-					__scene.brushBehavior = "";
+					__scene.brush = __brush4;
+					__scene.brushBehavior = "expand";
 					
 				break;
 				case "brush5":
-					__scene.brush = __brush5.image;
+					__scene.brush = __brush5;
 					__scene.brushBehavior = "rotate_normal20x";
 			
 				break;
 				case "brush6":
-					__scene.brush = __brush6.image;
+					__scene.brush = __brush6;
 					__scene.brushBehavior = "pulse";
 				
 				break;
 				case "brush7":
-					__scene.brush = __brush7.image;
+					__scene.brush = __brush7;
 					__scene.brushBehavior = "interval_dash";
 				default:
 			}

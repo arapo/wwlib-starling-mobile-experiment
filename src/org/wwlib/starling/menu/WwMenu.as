@@ -24,6 +24,7 @@ package org.wwlib.starling.menu
 		private var __tabXML:XML;
 		private var __optionsXMLList:XMLList;
 		private var __options:Vector.<WwMenuOption> = new Vector.<WwMenuOption>();
+		private var __xmltransition:String;
 		private var __transition:String;
 		private var __menuTab:WwMenuOption;
 		
@@ -37,8 +38,24 @@ package org.wwlib.starling.menu
 			__yOff = xml.@y_off * __scaleFactor;
 			__xOn = xml.@x_on * __scaleFactor;
 			__yOn = xml.@y_on * __scaleFactor;
-			__transition = xml.@transition;
-			__transition = Transitions.EASE_IN_OUT;
+			
+			__xmltransition = xml.@transition;
+			
+			switch(__xmltransition)
+			{
+				case "bounce":  __transition = Transitions.EASE_OUT_BOUNCE;
+					break;
+				
+				case "linear":  __transition = Transitions.LINEAR;
+					break;
+					
+				case "elastic": __transition = Transitions.EASE_OUT_ELASTIC;
+					
+				default:  __transition = Transitions.EASE_IN_OUT;
+					break;
+			}
+			
+			
 			
 			x = __xOff;
 			y = __yOff;
@@ -55,12 +72,12 @@ package org.wwlib.starling.menu
 		{
 			super.onReady();
 			
-			//TEST MENU TAB
+			//MENU TAB
 			__menuTab = new WwMenuOption(this, __tabXML);
 			addChild(__menuTab);
 			__menuTab.addEventListener(TouchEvent.TOUCH, onTouchMenuTab);
 			
-			//TEST MENU OPTIONS
+			//MENU OPTIONS
 			var option_xml:XML;
 			var index:int = 0;
 			for each (option_xml in __optionsXMLList)
