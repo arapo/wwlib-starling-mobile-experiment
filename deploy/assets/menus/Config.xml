@@ -54,10 +54,18 @@
 		<option id="seal" value="Seal"  img_url="assets/menus/icons/page_seal.png" x="323" y="79" />
 		<option id="blank" value="Blank"  img_url="assets/menus/icons/page_blank.png" x="468" y="79" />
 	</menu>
+	
 	<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/debug_tab.png" transition="linear">
 		<tab x="0" y="0" img_url="assets/menus/icons/debug_tab.png" />
 		<option id="btn1" value="btn1"  img_url="assets/menus/icons/debug_btn1.png" x="25" y="70" />
 		<option id="btn2" value="btn2"  img_url="assets/menus/icons/debug_btn2.png" x="25" y="140" />
 		<option id="btn3" value="btn3"  img_url="assets/menus/icons/debug_btn3.png" x="25" y="210" />
 	</menu>
+	
+	<splash id="intro">
+		<option id="splash1" height="" width="" x_offset="" y_offset="" type="image" url="" duration="" />
+		<option id="splash2" height="" width="" x_offset="" y_offset="" type="image" url="" duration="" />
+		<option id="splash3" height="" width="" x_offset="" y_offset="" type="image" url="" duration="" />
+	</splash>
+	
 </menus>

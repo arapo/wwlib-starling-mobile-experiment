@@ -8,6 +8,7 @@ package scenes
 	import org.wwlib.starling.WwSprite;
 	import org.wwlib.util.WwDebug;
 	import org.wwlib.util.WwDeviceInfo;
+	import starling.animation.Juggler;
     
     import starling.display.BlendMode;
     import starling.display.Button;
@@ -102,6 +103,7 @@ package scenes
             //                Transitions.EASE_OUT_ELASTIC];
 							
 			__menuManager = WwMenuManager.init(this);
+			__menuManager = WwMenuManager.init(this);
 			__menuManager.loadXML();
 			
 			//Movie Test
@@ -123,6 +125,9 @@ package scenes
             // this is the recommended way to do that.
             addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+			
+			Starling.juggler.add(new SplashManager())
+			
         }
 		
         private function onAddedToStage(event:Event):void

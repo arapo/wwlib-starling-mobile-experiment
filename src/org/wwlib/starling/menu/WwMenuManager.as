@@ -25,7 +25,7 @@ package org.wwlib.starling.menu
 		private static var __instance:WwMenuManager;
 		private var __debug:WwDebug;
 		
-		private var __menuXmlURL:String = "assets/menus/QC_menus.xml";
+		private var __menuXmlURL:String = "assets/menus/Config.xml";
 		private var __xml:XML;
 		private var __menuXMLList:XMLList;
 		private var __scene:RenderTextureScene;
