@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <menus>
-	<menu id="colors" x_on="24" y_on="30" x_off="24" y_off="-536" img_url="assets/menus/menu_bg.png" transition="bounce">
+	<menu id="colors" x_on="24" y_on="30" x_off="24" y_off="-536" img_url="assets/menus/menu_bg.png" transition="default">
 		<tab x="33" y="526" img_url="assets/menus/icons/tab_colors.png" />
 		<option id="lobster_red" value="0xf66b05"  img_url="assets/menus/icons/color_orange_f66b05.png" x="33" y="79" />
 		<option id="sky_blue" value="0x05b0f6"  img_url="assets/menus/icons/color_ltBlue_05b0f6.png" x="178" y="79" />
-		<option id="rainbow" value="rainbow"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="79" />
-		<option id="random_rainbow" value="random_rainbow"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="79" />
+		<option id="rainbow" value="rainbow"  img_url="assets/menus/icons/rainbow_icon.png" x="323" y="79" />
+		<option id="random_rainbow" value="random_rainbow"  img_url="assets/menus/icons/randrainbow_icon.png" x="468" y="79" />
 		<option id="seaweed_green" value="0x000000"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="79" />
 		<option id="seaweed_green" value="0xFFFFFF"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="79" />
 		
-		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="33" y="224" />
+		<option id="erase" value="erase"  img_url="assets/menus/icons/color_seaweed_green.png" x="33" y="224" />
 		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="178" y="224" />
 		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="224" />
 		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="224" />
@@ -23,7 +23,7 @@
 		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="369" />
 		<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="369" />
 	</menu>
-	<menu id="brushes" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
+	<menu id="brushes" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="linear">
 		<tab x="146" y="526" img_url="assets/menus/icons/tab_brushes.png" />
 		<option id="quill" value="brush1"  img_url="assets/menus/icons/brush_quill.png" x="33" y="79" />
 		<option id="sand" value="brush2"  img_url="assets/menus/icons/brush_sand.png" x="178" y="79" />
@@ -54,10 +54,18 @@
 		<option id="seal" value="Seal"  img_url="assets/menus/icons/page_seal.png" x="323" y="79" />
 		<option id="blank" value="Blank"  img_url="assets/menus/icons/page_blank.png" x="468" y="79" />
 	</menu>
+	
 	<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/debug_tab.png" transition="linear">
 		<tab x="0" y="0" img_url="assets/menus/icons/debug_tab.png" />
 		<option id="btn1" value="btn1"  img_url="assets/menus/icons/debug_btn1.png" x="25" y="70" />
 		<option id="btn2" value="btn2"  img_url="assets/menus/icons/debug_btn2.png" x="25" y="140" />
 		<option id="btn3" value="btn3"  img_url="assets/menus/icons/debug_btn3.png" x="25" y="210" />
 	</menu>
+	
+	<splash id="intro">
+		<option id="splash1" height="" width="" x_offset="" y_offset="" type="image" url="" duration="" />
+		<option id="splash2" height="" width="" x_offset="" y_offset="" type="image" url="" duration="" />
+		<option id="splash3" height="" width="" x_offset="" y_offset="" type="image" url="" duration="" />
+	</splash>
+	
 </menus>
