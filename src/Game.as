@@ -31,8 +31,6 @@ package
     public class Game extends Sprite
     {
 
-        
-		private var __bg:WwSprite;
 		private var __sceneManager:WwSceneManager;
 		
         public function Game()
@@ -53,10 +51,6 @@ package
             Assets.loadBitmapFonts();
             
             // create and show menu screen
-			
-			__bg = new WwSprite();
-			__bg.loadImage("assets/coloring_pages/background_960.png");
-			addChild(__bg);
 			
             addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);

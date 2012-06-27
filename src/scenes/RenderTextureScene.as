@@ -4,8 +4,8 @@ package scenes
     import flash.geom.Point;
     import flash.utils.Dictionary;
 	import org.wwlib.starling.menu.WwMenu;
-	//import org.wwlib.starling.menu.WwMenuManager;
 	import org.wwlib.starling.WwBrush;
+	import org.wwlib.starling.WwSceneManager;
 	import org.wwlib.starling.WwSprite;
 	import org.wwlib.util.WwDebug;
 	import org.wwlib.util.WwDeviceInfo;
@@ -38,6 +38,7 @@ package scenes
         private var mColors:Dictionary;
 		
 		private var __coloringPage:WwSprite;
+		private var __coloringPageBG:WwSprite;
 		
 		private var __transitions:Array;
 		private var __debug:WwDebug;
@@ -94,12 +95,17 @@ package scenes
 		private var __brush7:WwBrush;
 		
         
-        public function RenderTextureScene()
+        public function RenderTextureScene(scene_manager:WwSceneManager)
         {
+			super(scene_manager);
 			__debug = WwDebug.instance;
 			__debug.msg("Starling.current.stage.stageWidth: " + Starling.current.stage.stageWidth);
 			__debug.msg("Starling.current.stage.stageWidth: " + Starling.current.stage.stageHeight);
 			__debug.msg("Starling.current.contentScaleFactor: " + Starling.current.contentScaleFactor);
+			
+			__coloringPageBG = new WwSprite();
+			__coloringPageBG.loadImage("assets/coloring_pages/background_960.png");
+			addChild(__coloringPageBG);
 			
             mColors = new Dictionary();
             mRenderTexture = new RenderTexture(WwDeviceInfo.instance.canvasWidth, WwDeviceInfo.instance.canvasHeight);
@@ -121,11 +127,13 @@ package scenes
             //mMovie.setFrameSound(2, stepSound);
             
             // move the clip to the center and add it to the stage
+			/*
             mMovie.x = WwDeviceInfo.instance.width - mMovie.width;// - (20 * WwDeviceInfo.instance.assetScaleFactor);
             mMovie.y = (20 * WwDeviceInfo.instance.assetScaleFactor);
 			mMovie.scaleX = .5;
 			mMovie.scaleY = .5;
             addChild(mMovie);
+			*/
 			
             // like any animation, the movie needs to be added to the juggler!
             // this is the recommended way to do that.
@@ -138,12 +146,12 @@ package scenes
 		
         private function onAddedToStage(event:Event):void
         {
-            Starling.juggler.add(mMovie);
+            //Starling.juggler.add(mMovie);
         }
         
         private function onRemovedFromStage(event:Event):void
         {
-            Starling.juggler.remove(mMovie);
+            //Starling.juggler.remove(mMovie);
         }
         
         private function onTouch(event:TouchEvent):void

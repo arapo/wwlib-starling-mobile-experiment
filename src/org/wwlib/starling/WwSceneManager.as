@@ -7,6 +7,10 @@ package org.wwlib.starling
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
+	import scenes.MainScene;
+	import scenes.PreschoologyScene;
+	import scenes.QuahogScene;
+	import scenes.StoryScene;
 	//import org.wwlib.starling.menu.WwMenuManager;
 	import org.wwlib.starling.WwBrush;
 	import org.wwlib.starling.WwSprite;
@@ -35,14 +39,21 @@ package org.wwlib.starling
 		private static var __instance:WwSceneManager;
 		private var __debug:WwDebug;
 		
+		private var __bg:WwSprite;
 		private var __sceneXmlURL:String = "assets/Config.xml";
 		private var __xml:XML;
 		private var __sceneXMLList:XMLList;
 		private var __appSprite:starling.display.Sprite;
-		//private var __menuManager:WwMenuManager;
 		private var __MainMenu:Sprite;
         private var __CurrentScene:Scene;
 		private var __sceneDictionary:Dictionary = new Dictionary();
+		
+		//Dependencies
+		private var __dependency_RenderTextureScene:RenderTextureScene;
+		private var __dependency_QuahogScene:QuahogScene;
+		private var __dependency_PreschoologyScene:PreschoologyScene;
+		private var __dependency_MainScene:MainScene;
+		private var __dependency_StoryScene:StoryScene;
 		
 		/**
 		*   Construct the WwSceneManager. This class is a Singleton, so it should not
@@ -73,6 +84,7 @@ package org.wwlib.starling
 			}
 			
 			__instance.__appSprite = app;
+			__instance.setup();
 			return __instance;
 		}
 		
@@ -80,14 +92,9 @@ package org.wwlib.starling
 		{
 			addEventListener(Scene.CLOSING, onSceneClosing);
             
-            var logo:Image = new Image(Assets.getTexture("Logo"));
-            addChild(logo);
-            
-            var scenesToCreate:Array = [
-                ["Coloring Demo", RenderTextureScene],
-				["Dependency", AnimationScene]
-				
-			];
+			__bg = new WwSprite();
+			__bg.loadImage("assets/scenes/curtain_bg_1024.jpg");
+			addChild(__bg);
 		}
 		
 		/**
@@ -133,13 +140,20 @@ package org.wwlib.starling
 				__debug.msg("Scene: " + scene_id);
 				
 				__sceneDictionary[scene_id] = scene_xml;
+				
+				if (scene_xml.@type == "title")
+				{
+					showScene(scene_id);
+				}
 
+				/*
 				var button:Button = new Button(buttonTexture, scene_id);
 				button.x = count % 2 == 0 ? 28 : 167;
 				button.y = 180 + int(count / 2) * 52;
 				button.name = scene_id;
 				button.addEventListener(starling.events.Event.TRIGGERED, onButtonTriggered);
 				addChild(button);
+				*/
 				++count;
 			}
 		}
@@ -158,14 +172,50 @@ package org.wwlib.starling
         
         private function showScene(name:String):void
         {
-            if (__CurrentScene) return;
+            if (__CurrentScene)
+			{
+				__CurrentScene.removeFromParent(true);
+				__CurrentScene = null;
+			}
             
 			var sceneXML:XML = __sceneDictionary[name];
             var sceneClass:Class = getDefinitionByName(sceneXML.@class_name) as Class;
-            __CurrentScene = new sceneClass() as Scene;
+            __CurrentScene = new sceneClass(this) as Scene;
 			__CurrentScene.initMenusWithXML(__sceneDictionary[name]);
+			__CurrentScene.x = sceneXML.@x;
+			__CurrentScene.y = sceneXML.@y;
             addChild(__CurrentScene);
         }
+		
+		public function sceneChange(scene:String, event:String):void
+		{
+			__debug.msg("sceneChange: " + scene + ", " + event);
+			switch (scene) 
+			{
+				case "Main":
+					if (event == "Story")
+					{
+						showScene("Story");
+					}
+					else if (event == "Coloring")
+					{
+						showScene("Coloring");
+					}
+					
+				break;
+				case "Title_Quahog":
+					showScene("Title_Preschoology");
+				break;
+				case "Title_Preschoology":
+					showScene("Main");
+				break;
+				case "Story":
+					showScene("Main");
+				break;
+				default:
+			}
+			
+		}
 	}
 }
 
