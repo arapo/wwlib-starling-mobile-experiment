@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <app>
 	<scene id="Coloring" type="" class_name="scenes.RenderTextureScene" x="32" y="0">
-		<menu id="colors" x_on="24" y_on="30" x_off="24" y_off="-536" img_url="assets/menus/menu_bg.png" transition="default">
+		<menu id="colors" x_on="24" y_on="30" x_off="24" y_off="-536" img_url="assets/menus/menu_bg.png" transition="bounce">
 			<tab x="33" y="526" img_url="assets/menus/icons/tab_colors.png" />
 			<option id="lobster_red" value="0xf66b05"  img_url="assets/menus/icons/color_orange_f66b05.png" x="33" y="79" />
 			<option id="sky_blue" value="0x05b0f6"  img_url="assets/menus/icons/color_ltBlue_05b0f6.png" x="178" y="79" />
@@ -26,7 +26,7 @@
 			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="369" />
 			-->
 		</menu>
-		<menu id="brushes" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="linear">
+		<menu id="brushes" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
 			<tab x="146" y="526" img_url="assets/menus/icons/tab_brushes.png" />
 			<option id="quill" value="brush1"  img_url="assets/menus/icons/brush_quill.png" x="33" y="79" />
 			<option id="sand" value="brush2"  img_url="assets/menus/icons/brush_sand.png" x="178" y="79" />
@@ -54,10 +54,8 @@
 		</menu>
 		<menu id="pages" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
 			<tab x="257" y="526" img_url="assets/menus/icons/tab_pages.png" />
-			<option id="snail" value="Snail"  img_url="assets/menus/icons/page_snail.png" x="33" y="79" />
-			<option id="octopus" value="Octopus"  img_url="assets/menus/icons/page_octopus.png" x="178" y="79" />
-			<option id="seal" value="Seal"  img_url="assets/menus/icons/page_seal.png" x="323" y="79" />
-			<option id="blank" value="Blank"  img_url="assets/menus/icons/page_blank.png" x="468" y="79" />
+			<option id="high_five" value="HighFive"  img_url="assets/menus/icons/page_high_five.png" x="33" y="79" />
+			<option id="white" value="White"  img_url="assets/menus/icons/page_white.png" x="178" y="79" />
 		</menu>
 		<!--
 		<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/invisible_tab.png" transition="linear">
@@ -80,8 +78,9 @@
 	<scene id="Main" type="" class_name="scenes.MainScene" x="32" y="64">
 		<menu id="main" x_on="0" y_on="0" x_off="0" y_off="0"  img_url="assets/menus/icons/invisible_tab.png" transition="linear">
 			<tab x="0" y="0" img_url="assets/menus/icons/invisible_tab.png" />
-			<option id="btn1" value="btn1"  img_url="assets/menus/story.png" x="142" y="268" />
-			<option id="btn2" value="btn2"  img_url="assets/menus/reward.png" x="595" y="268" />
+			<option id="btn1" value="btn1"  img_url="assets/menus/story.png" x="142" y="380" />
+			<option id="btn2" value="btn2"  img_url="assets/menus/reward.png" x="595" y="380" />
+			<option id="btn3" value="btn3"  img_url="assets/scenes/pottyshow_title.png" x="110" y="60" />
 		</menu>
 		<!--
 		<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/invisible_tab.png" transition="linear">

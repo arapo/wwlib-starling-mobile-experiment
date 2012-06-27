@@ -115,7 +115,7 @@ package scenes
 			
 			__coloringPage = new WwSprite();
 			__coloringPage.addEventListener(TouchEvent.TOUCH, onTouch);
-			__coloringPage.loadImage("assets/coloring_pages/sullivan_snail_960.png");
+			__coloringPage.loadImage("assets/coloring_pages/blank_960.png");
 			addChild(__coloringPage);
 			
 			//Movie Test
@@ -348,7 +348,11 @@ package scenes
 		public function set brushColorFromString(hex_color:String):void
 		{
 			__activeColor =  uint(hex_color);
-			if (mBrush != null)
+			if (mBrush == null)
+			{
+				brush = __brush3;
+			}
+			if (true)
 			{		
 				
 				switch (hex_color)
@@ -518,16 +522,10 @@ package scenes
 			
 			switch (value) 
 			{
-				case "Snail":
-					page = "assets/coloring_pages/sullivan_snail_960_8bit.png";
+				case "HighFive":
+					page = "assets/coloring_pages/high_five_960.png";
 				break;
-				case "Octopus":
-					page = "assets/coloring_pages/sullivan_octopus_960_8bit.png";
-				break;
-				case "Seal":
-					page = "assets/coloring_pages/sullivan_seal_960_8bit.png";
-				break;
-				case "Blank":
+				case "White":
 					page = "assets/coloring_pages/blank_960.png";
 				break;
 				default:
