@@ -3,6 +3,7 @@ package
     import flash.ui.Keyboard;
     import flash.utils.getDefinitionByName;
     import flash.utils.getQualifiedClassName;
+	import org.wwlib.starling.WwSceneManager;
 	import org.wwlib.starling.WwSprite;
 	import org.wwlib.util.WwDeviceInfo;
     
@@ -29,10 +30,10 @@ package
 
     public class Game extends Sprite
     {
-        private var mMainMenu:Sprite;
-        private var mCurrentScene:Scene;
+
         
 		private var __bg:WwSprite;
+		private var __sceneManager:WwSceneManager;
 		
         public function Game()
         {
@@ -56,60 +57,13 @@ package
 			__bg = new WwSprite();
 			__bg.loadImage("assets/coloring_pages/background_960.png");
 			addChild(__bg);
-            
-            mMainMenu = new Sprite();
-            addChild(mMainMenu);
-            
-            var logo:Image = new Image(Assets.getTexture("Logo"));
-            mMainMenu.addChild(logo);
-            
-            var scenesToCreate:Array = [
-                ["Coloring Demo", RenderTextureScene]
-				
-			];
-			/*
-				["Textures", TextureScene],
-                ["Multitouch", TouchScene],
-                ["TextFields", TextScene],
-                ["Animations", AnimationScene],
-                ["Custom hit-test", CustomHitTestScene],
-                ["Movie Clip", MovieScene],
-                ["Benchmark", BenchmarkScene]
-            ];
-			*/
-            
-            var buttonTexture:Texture = Assets.getTexture("ButtonBig");
-            var count:int = 0;
-            
-            for each (var sceneToCreate:Array in scenesToCreate)
-            {
-                var sceneTitle:String = sceneToCreate[0];
-                var sceneClass:Class  = sceneToCreate[1];
-                
-                var button:Button = new Button(buttonTexture, sceneTitle);
-                button.x = count % 2 == 0 ? 28 : 167;
-                button.y = 180 + int(count / 2) * 52;
-                button.name = getQualifiedClassName(sceneClass);
-                button.addEventListener(Event.TRIGGERED, onButtonTriggered);
-                mMainMenu.addChild(button);
-                ++count;
-            }
-            
-            addEventListener(Scene.CLOSING, onSceneClosing);
+			
             addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
             
-            // show information about rendering method (hardware/software)
-            
-			/*
-            var driverInfo:String = Starling.context.driverInfo;
-            var infoText:TextField = new TextField(310, 64, driverInfo, "Verdana", 10);
-            infoText.x = 5;
-            infoText.y = 475 - infoText.height;
-            infoText.vAlign = VAlign.BOTTOM;
-            infoText.touchable = false;
-            mMainMenu.addChild(infoText);
-			*/
+			__sceneManager = WwSceneManager.init(this);
+			addChild(__sceneManager);
+			__sceneManager.loadXML();
         }
         
         private function onAddedToStage(event:Event):void
@@ -128,29 +82,6 @@ package
                 Starling.current.showStats = !Starling.current.showStats;
             else if (event.keyCode == Keyboard.X)
                 Starling.context.dispose();
-        }
-        
-        private function onButtonTriggered(event:Event):void
-        {
-            var button:Button = event.target as Button;
-            showScene(button.name);
-        }
-        
-        private function onSceneClosing(event:Event):void
-        {
-            mCurrentScene.removeFromParent(true);
-            mCurrentScene = null;
-            mMainMenu.visible = true;
-        }
-        
-        private function showScene(name:String):void
-        {
-            if (mCurrentScene) return;
-            
-            var sceneClass:Class = getDefinitionByName(name) as Class;
-            mCurrentScene = new sceneClass() as Scene;
-            mMainMenu.visible = false;
-            addChild(mCurrentScene);
         }
     }
 }

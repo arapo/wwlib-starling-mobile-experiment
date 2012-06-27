@@ -3,7 +3,8 @@ package scenes
 	import flash.display.LoaderInfo;
     import flash.geom.Point;
     import flash.utils.Dictionary;
-	import org.wwlib.starling.menu.WwMenuManager;
+	import org.wwlib.starling.menu.WwMenu;
+	//import org.wwlib.starling.menu.WwMenuManager;
 	import org.wwlib.starling.WwBrush;
 	import org.wwlib.starling.WwSprite;
 	import org.wwlib.util.WwDebug;
@@ -39,7 +40,6 @@ package scenes
 		private var __coloringPage:WwSprite;
 		
 		private var __transitions:Array;
-		private var __menuManager:WwMenuManager;
 		private var __debug:WwDebug;
 		private var __activeColor:uint;
 		private var __rotateBrush:Boolean = true;
@@ -74,6 +74,25 @@ package scenes
 		private var __expandscale:Number = 0;
 		
 		private var __blendmode:String;
+		
+		/*** MENUS ******************************/
+		
+		private var __menuXMLList:XMLList;
+		private var __colorsMenu:WwMenu;
+		private var __brushesMenu:WwMenu;
+		private var __pagesMenu:WwMenu;
+		private var __shareMenu:WwMenu;
+		private var __shopMenu:WwMenu;
+		private var __debugMenu:WwMenu;
+		
+		private var __brush1:WwBrush;
+		private var __brush2:WwBrush;
+		private var __brush3:WwBrush;
+		private var __brush4:WwBrush;
+		private var __brush5:WwBrush;
+		private var __brush6:WwBrush;
+		private var __brush7:WwBrush;
+		
         
         public function RenderTextureScene()
         {
@@ -92,19 +111,6 @@ package scenes
 			__coloringPage.addEventListener(TouchEvent.TOUCH, onTouch);
 			__coloringPage.loadImage("assets/coloring_pages/sullivan_snail_960.png");
 			addChild(__coloringPage);
-            
-            //mBrush = new Image(Assets.getTexture("Brush"));
-            //mBrush.pivotX = mBrush.width / 2;
-            //mBrush.pivotY = mBrush.height / 2;
-            //mBrush.blendMode = BlendMode.NORMAL;
-  
-			//__transitions = [Transitions.LINEAR, Transitions.EASE_OUT, Transitions.EASE_IN_OUT,
-            //                Transitions.EASE_OUT_BACK, Transitions.EASE_OUT_BOUNCE,
-            //                Transitions.EASE_OUT_ELASTIC];
-							
-			__menuManager = WwMenuManager.init(this);
-			__menuManager = WwMenuManager.init(this);
-			__menuManager.loadXML();
 			
 			//Movie Test
 			var frames:Vector.<Texture> = Assets.getTextureAtlas().getTextures("flight");
@@ -126,7 +132,7 @@ package scenes
             addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 			
-			Starling.juggler.add(new SplashManager())
+			loadBrushes();
 			
         }
 		
@@ -157,9 +163,6 @@ package scenes
 						__expandscale = 0;
 					
 					}	
-						
-						
-						
 						
                     if (touch.phase == TouchPhase.HOVER || touch.phase == TouchPhase.ENDED)
                         continue;
@@ -265,7 +268,7 @@ package scenes
 							
 								mBrush.resetScale();
 							
-								__debug.msg("rotation" + mBrush.image.rotation)
+								//__debug.msg("rotation" + mBrush.image.rotation)
 							
 								mBrush.image.rotation = Math.atan2(__prevy-location.y,__prevx-location.x)-(Math.PI/2)
 							
@@ -320,7 +323,7 @@ package scenes
 							mBrush.image.scaleX = __expandscale;
 							mBrush.image.scaleY = __expandscale;
 							
-							__debug.msg ("expandscale: " + mBrush.image.scaleX); 
+							//__debug.msg ("expandscale: " + mBrush.image.scaleX); 
 					
 						default:
 						
@@ -368,7 +371,7 @@ package scenes
 						__brushDynamicColor = "";					
 						//__activeColor =  uint(hex_color);
 						mBrush.image.color = __activeColor;
-						__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.image.color); 
+						//__debug.msg("brushColorFromString: " + hex_color + ", " + mBrush.image.color); 
 					break;
 				}
 			}
@@ -400,6 +403,175 @@ package scenes
             mRenderTexture.dispose();
             super.dispose();
         }
-
+		
+		/*** MENUS *************************/
+		
+		public override function initMenusWithXML(xml:XML):void
+		{
+			//__debug.clear();
+			__debug.msg("initMenusWithXML: ");
+			
+			__menuXMLList = xml.menu;
+			var menu_xml:XML;
+			var tab_xml:XML;
+			var options_xmlList:XMLList;
+			var index:int = 0;
+			for each (menu_xml in __menuXMLList)
+			{
+				tab_xml = menu_xml.tab[0];
+				options_xmlList = menu_xml.option;
+				var menu_id:String = menu_xml.@id;
+				__debug.msg(menu_id);
+				
+				switch (menu_id) 
+				{
+					case "colors":
+						__colorsMenu = new WwMenu(menu_xml);
+						addChild(__colorsMenu);
+						__colorsMenu.setOptionFunction(colorsMenuOption);
+					break;
+					case "brushes":
+						__brushesMenu = new WwMenu(menu_xml);
+						addChild(__brushesMenu);
+						__brushesMenu.setOptionFunction(brushesMenuOption);
+					break;	
+					case "pages":
+						__pagesMenu = new WwMenu(menu_xml);
+						addChild(__pagesMenu);
+						__pagesMenu.setOptionFunction(pagesMenuOption);
+					break;
+					case "debug":
+						__debugMenu = new WwMenu(menu_xml);
+						addChild(__debugMenu);
+						__debugMenu.setOptionFunction(debugMenuOption);
+					break;	
+					default:
+				}
+				
+				index++;
+			}
+		}
+		
+		public function colorsMenuOption(value:String):void
+		{
+			__debug.msg("colorMenuOption: " + value);
+			
+			brushColorFromString = value;
+		}
+		
+		public function brushesMenuOption(value:String):void
+		{
+			__debug.msg("brushMenuOption: " + value);
+			
+			switch (value) 
+			{
+				case "brush1":
+					brush = __brush1;
+					brushBehavior = "";
+	
+				break;
+				case "brush2":
+					brush = __brush2;
+					brushBehavior = "";
+					
+				break;
+				case "brush3":
+					brush = __brush3;
+					brushBehavior = "rotate_random";
+					
+				break;
+				case "brush4":
+					brush = __brush4;
+					brushBehavior = "expand";
+					
+				break;
+				case "brush5":
+					brush = __brush5;
+					brushBehavior = "rotate_normal20x";
+			
+				break;
+				case "brush6":
+					brush = __brush6;
+					brushBehavior = "pulse";
+				
+				break;
+				case "brush7":
+					brush = __brush7;
+					brushBehavior = "interval_dash";
+				default:
+			}
+		
+			
+		}
+		
+		public function pagesMenuOption(value:String):void
+		{
+			__debug.msg("pagesMenuOption: " + value);
+			
+			switch (value) 
+			{
+				case "Snail":
+					page = "assets/coloring_pages/sullivan_snail_960_8bit.png";
+				break;
+				case "Octopus":
+					page = "assets/coloring_pages/sullivan_octopus_960_8bit.png";
+				break;
+				case "Seal":
+					page = "assets/coloring_pages/sullivan_seal_960_8bit.png";
+				break;
+				case "Blank":
+					page = "assets/coloring_pages/blank_960.png";
+				break;
+				default:
+			}
+			
+		}
+		
+		public function debugMenuOption(value:String):void
+		{
+			__debug.msg("debugMenuOption: " + value);
+			switch (value) 
+			{
+				case "btn1":
+					__debug.show = !__debug.show;
+				break;
+				case "btn2":
+					__debug.clear();
+				break;
+				case "btn3":
+					if (__debug.alpha < 1)
+					{
+						__debug.alpha = 1;
+					}
+					else
+					{
+						__debug.alpha = .5;
+					}
+				break;
+				default:
+			}
+			
+			
+		}
+		
+		public function loadBrushes():void
+		{
+			__brush1 = new WwBrush();
+			__brush2 = new WwBrush();
+			__brush3 = new WwBrush();
+			__brush4 = new WwBrush();
+			__brush5 = new WwBrush();
+			__brush6 = new WwBrush();
+			__brush7 = new WwBrush();
+			
+			__brush1.loadImage("assets/menus/brushes/brush_calligraphy.png");
+			__brush2.loadImage("assets/menus/brushes/brush_circleSoft.png");
+			__brush3.loadImage("assets/menus/brushes/brush_crayon.png");
+			__brush4.loadImage("assets/menus/brushes/brush_circle.png");
+			__brush5.loadImage("assets/menus/brushes/brush_spiral.png");
+			__brush6.loadImage("assets/menus/brushes/brush_circle.png");
+			__brush7.loadImage("assets/menus/brushes/brush_arrow.png");
+			//__brush7.loadImage("assets/menus/brushes/brush_webbed_feet.png");
+		}
     }
 }

@@ -24,5 +24,10 @@ package scenes
             //mBackButton.removeEventListener(Event.TRIGGERED, onBackButtonTriggered);
             //dispatchEvent(new Event(CLOSING, true));
         }
+		
+		public function initMenusWithXML(xml:XML):void
+		{
+			//Override
+		}
     }
 }
