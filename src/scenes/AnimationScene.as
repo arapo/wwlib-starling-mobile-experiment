@@ -58,7 +58,7 @@ package scenes
         }
 		
 				
-		private function onStartButtonTriggered(event:Event)
+		private function onStartButtonTriggered(event:Event):String
 		{
 			
 			var toggle:String;
