@@ -36,6 +36,7 @@
 			<option id="brush6" value="brush6"  img_url="assets/menus/icons/brush_circle_icon.png" x="758" y="79" />
 			
 			<option id="brush7" value="brush7"  img_url="assets/menus/icons/brush_arrow_icon.png" x="33" y="224" />
+			<option id="brush8" value="brush8"  img_url="assets/menus/icons/brush_circle_icon.png" x="178" y="224" />
 			<!--
 			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="178" y="224" />
 			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="224" />

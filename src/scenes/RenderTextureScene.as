@@ -93,6 +93,7 @@ package scenes
 		private var __brush5:WwBrush;
 		private var __brush6:WwBrush;
 		private var __brush7:WwBrush;
+		private var __brush8:WwBrush;
 		
         
         public function RenderTextureScene(scene_manager:WwSceneManager)
@@ -494,7 +495,7 @@ package scenes
 				break;
 				case "brush4":
 					brush = __brush4;
-					brushBehavior = "expand";
+					brushBehavior = "";
 					
 				break;
 				case "brush5":
@@ -510,6 +511,12 @@ package scenes
 				case "brush7":
 					brush = __brush7;
 					brushBehavior = "interval_dash";
+				break;
+				case "brush8":
+					brush = __brush8;
+					brushBehavior = "expand";
+				break;			
+				
 				default:
 			}
 		
@@ -569,6 +576,7 @@ package scenes
 			__brush5 = new WwBrush();
 			__brush6 = new WwBrush();
 			__brush7 = new WwBrush();
+			__brush8 = new WwBrush();
 			
 			__brush1.loadImage("assets/menus/brushes/brush_calligraphy.png");
 			__brush2.loadImage("assets/menus/brushes/brush_circleSoft.png");
@@ -578,6 +586,7 @@ package scenes
 			__brush6.loadImage("assets/menus/brushes/brush_circle.png");
 			__brush7.loadImage("assets/menus/brushes/brush_arrow.png");
 			//__brush7.loadImage("assets/menus/brushes/brush_webbed_feet.png");
+			__brush8.loadImage("assets/menus/brushes/brush_circle.png");
 		}
     }
 }
