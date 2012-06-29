@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<app>
+	<scene id="Coloring" type="" class_name="scenes.RenderTextureScene" x="32" y="0">
+		<menu id="colors" x_on="24" y_on="30" x_off="24" y_off="-536" img_url="assets/menus/menu_bg.png" transition="bounce">
+			<tab x="33" y="526" img_url="assets/menus/icons/tab_colors.png" />
+			<option id="lobster_red" value="0xf66b05"  img_url="assets/menus/icons/color_orange_f66b05.png" x="33" y="79" />
+			<option id="sky_blue" value="0x05b0f6"  img_url="assets/menus/icons/color_ltBlue_05b0f6.png" x="178" y="79" />
+			<option id="rainbow" value="rainbow"  img_url="assets/menus/icons/rainbow_icon.png" x="323" y="79" />
+			<option id="random_rainbow" value="random_rainbow"  img_url="assets/menus/icons/randrainbow_icon.png" x="468" y="79" />
+			<option id="seaweed_green" value="0x000000"  img_url="assets/menus/icons/color_black_000000.png" x="613" y="79" />
+			<option id="seaweed_green" value="0xFFFFFF"  img_url="assets/menus/icons/color_white_FFFFFF.png" x="758" y="79" />
+			
+			<option id="erase" value="erase"  img_url="assets/menus/icons/eraser_icon.png" x="33" y="224" />
+			<!--
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="178" y="224" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="224" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="224" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="224" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="224" />
+			
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="33" y="369" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="178" y="369" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="369" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="369" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="369" />
+			<option id="seaweed_green" value="0x00FF00"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="369" />
+			-->
+		</menu>
+		<menu id="brushes" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
+			<tab x="146" y="526" img_url="assets/menus/icons/tab_brushes.png" />
+			<option id="quill" value="brush1"  img_url="assets/menus/icons/brush_quill.png" x="33" y="79" />
+			<option id="sand" value="brush2"  img_url="assets/menus/icons/brush_sand.png" x="178" y="79" />
+			<option id="slime" value="brush3"  img_url="assets/menus/icons/brush_slime.png" x="323" y="79" />
+			<option id="brush4" value="brush4"  img_url="assets/menus/icons/brush_circle_icon.png" x="468" y="79" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/brush_spiral_icon.png" x="613" y="79" />
+			<option id="brush6" value="brush6"  img_url="assets/menus/icons/brush_circle_icon.png" x="758" y="79" />
+			
+			<option id="brush7" value="brush7"  img_url="assets/menus/icons/brush_arrow_icon.png" x="33" y="224" />
+			<!--
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="178" y="224" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="224" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="224" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="224" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="224" />
+			
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="33" y="369" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="33" y="369" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="178" y="369" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="323" y="369" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="468" y="369" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="613" y="369" />
+			<option id="brush5" value="brush5"  img_url="assets/menus/icons/color_seaweed_green.png" x="758" y="369" />
+			-->
+		</menu>
+		<menu id="pages" x_on="24" y_on="30" x_off="24" y_off="-536"  img_url="assets/menus/menu_bg.png" transition="bounce">
+			<tab x="257" y="526" img_url="assets/menus/icons/tab_pages.png" />
+			<option id="high_five" value="HighFive"  img_url="assets/menus/icons/page_high_five.png" x="33" y="79" />
+			<option id="white" value="White"  img_url="assets/menus/icons/page_white.png" x="178" y="79" />
+		</menu>
+		<!--
+		<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/invisible_tab.png" transition="linear">
+			<tab x="0" y="0" img_url="assets/menus/icons/debug_tab.png" />
+			<option id="btn1" value="btn1"  img_url="assets/menus/icons/debug_btn1.png" x="25" y="70" />
+			<option id="btn2" value="btn2"  img_url="assets/menus/icons/debug_btn2.png" x="25" y="140" />
+			<option id="btn3" value="btn3"  img_url="assets/menus/icons/debug_btn3.png" x="25" y="210" />
+		</menu>
+		-->
+	</scene>
+	<scene id="Title_Quahog" type="title" class_name="scenes.QuahogScene"  x="32" y="64">
+
+	</scene>
+	<scene id="Title_Preschoology" type="" class_name="scenes.PreschoologyScene" x="32" y="64">
+		<menu id="main" x_on="0" y_on="0" x_off="0" y_off="0"  img_url="assets/menus/icons/invisible_tab.png" transition="linear">
+			<tab x="0" y="0" img_url="assets/menus/icons/invisible_tab.png" />
+			<option id="btn1" value="btn1"  img_url="assets/scenes/preschoology_logo.png" x="199" y="230" />
+		</menu>
+	</scene>
+	<scene id="Main" type="" class_name="scenes.MainScene" x="32" y="64">
+		<menu id="main" x_on="0" y_on="0" x_off="0" y_off="0"  img_url="assets/menus/icons/invisible_tab.png" transition="linear">
+			<tab x="0" y="0" img_url="assets/menus/icons/invisible_tab.png" />
+			<option id="btn1" value="btn1"  img_url="assets/menus/story.png" x="142" y="380" />
+			<option id="btn2" value="btn2"  img_url="assets/menus/reward.png" x="595" y="380" />
+			<option id="btn3" value="btn3"  img_url="assets/scenes/pottyshow_title.png" x="110" y="60" />
+		</menu>
+		<!--
+		<menu id="debug" x_on="910" y_on="0" x_off="935" y_off="0"  img_url="assets/menus/icons/invisible_tab.png" transition="linear">
+			<tab x="0" y="0" img_url="assets/menus/icons/debug_tab.png" />
+			<option id="btn1" value="btn1"  img_url="assets/menus/icons/debug_btn1.png" x="25" y="70" />
+			<option id="btn2" value="btn2"  img_url="assets/menus/icons/debug_btn2.png" x="25" y="140" />
+			<option id="btn3" value="btn3"  img_url="assets/menus/icons/debug_btn3.png" x="25" y="210" />
+		</menu>
+		-->
+	</scene>
+	<scene id="Story" type="" class_name="scenes.StoryScene" x="0" y="0">
+
+	</scene>
+</app>
